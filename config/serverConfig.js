@@ -17,7 +17,9 @@ var multiparty = require('connect-multiparty');
 // Consign - Easy Module Imports
 var consign = require('consign');
 consign().
-	include('./someDir')
+	include('./app/routes')
+	.then('./app/controllers')
+	.then('./app/models')
 	.into(app);
 
 module.exports = app;
