@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 // Connect-MultiParty - Receive Files From Client
 var multiparty = require('connect-multiparty');
+app.use(multiparty());
 
 // Consign - Easy Module Imports
 var consign = require('consign');

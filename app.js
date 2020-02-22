@@ -1,6 +1,6 @@
 const app = require('./config/serverConfig');
 
-// Get Port Passed By CLI
+// Get Port Passed By CLI. Default: 3000.
 const myArgs = process.argv.slice(2);
 var PORT;
 if(myArgs.length == 0){
