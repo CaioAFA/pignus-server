@@ -39,5 +39,6 @@ module.exports.uploadPhoto = (app, req, res) => {
 		}
 
 		console.log('Success.');
+		res.status(200).send('Success');
 	});
 }
