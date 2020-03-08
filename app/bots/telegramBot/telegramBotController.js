@@ -1,15 +1,16 @@
 // Bot name: @BillDaSilvaBot
-
+const helper = require('./helper');
 const TelegramBot = require('node-telegram-bot-api');
 const token = '1114270428:AAGzKFP-JtQZ1d3X27Cn9iWXcHGBwxasImI';
 const bot = new TelegramBot(token, {polling: true});
 
 // Read the "chatId" file in this directory to send messages to user
-const chatId = '990434657';
+const chatId = helper.getChatId();
 
 // Log the error when it occurs
 bot.on('polling_error', (err) => console.log(err));
 
+// ************************************ Messages to any users ************************************
 bot.on('message', (msg) => {
 	const clientChatId = msg.chat.id;
 
@@ -26,6 +27,8 @@ bot.on('message', (msg) => {
 
 	bot.sendMessage(clientChatId, message);
 });
+
+// ************************************ Messages to the "chatId" user ************************************
 
 // Send advices to the user
 module.exports.sendAdvice = function(photoPath){

@@ -20,8 +20,6 @@ module.exports.getPhoto = (app, req, res) => {
 }
 
 module.exports.uploadPhoto = (app, req, res) => {
-	console.log(req.files);
-
 	var photoData = req.files.photo;
 
 	// Change the photo name to not overwrite another file
@@ -38,7 +36,6 @@ module.exports.uploadPhoto = (app, req, res) => {
 			return res.status(500).send(err);
 		}
 
-		console.log('Success.');
 		res.status(200).send('Success');
 	});
 }
