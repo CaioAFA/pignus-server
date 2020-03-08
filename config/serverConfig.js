@@ -21,6 +21,7 @@ consign().
 	include('./app/routes')
 	.then('./app/controllers')
 	.then('./app/models')
+	.then('./app/bots')
 	.into(app);
 
 module.exports = app;

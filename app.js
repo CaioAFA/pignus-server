@@ -18,6 +18,8 @@ if(! fs.existsSync('./app/public/photos')){
 	fs.mkdirSync('./app/public/photos', {recursive: true});
 }
 
+app.app.bots.telegramBot.telegramBotController.sendAdvice('./app/public/photos/shrek.jpeg');
+
 app.listen(PORT, () => {
 	console.log(`Server ON on Port ${PORT}!`);
 });
