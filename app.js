@@ -1,3 +1,4 @@
+const fs  = require('fs');
 const app = require('./config/serverConfig');
 
 // Get Port Passed By CLI. Default: 3000.
@@ -9,6 +10,12 @@ if(myArgs.length == 0){
 }
 else{
 	PORT = parseInt(myArgs[0]);
+}
+
+// Verify if the necessary folders exists
+// If don't, we'll create then.
+if(! fs.existsSync('./app/public/photos')){
+	fs.mkdirSync('./app/public/photos', {recursive: true});
 }
 
 app.listen(PORT, () => {
