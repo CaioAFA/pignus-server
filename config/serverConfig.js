@@ -21,7 +21,8 @@ consign().
 	include('./app/routes')
 	.then('./app/controllers')
 	.then('./app/models')
-	.then('./app/bots')
+	.then('./app/bots/telegramBot/telegramBotController.js')
+	.then('./app/bots/telegramBot/helper.js')
 	.into(app);
 
 module.exports = app;

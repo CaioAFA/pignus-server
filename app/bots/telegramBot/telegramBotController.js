@@ -4,8 +4,22 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '1114270428:AAGzKFP-JtQZ1d3X27Cn9iWXcHGBwxasImI';
 const bot = new TelegramBot(token, {polling: true});
 
-// Read the "chatId" file in this directory to send messages to user
-const chatId = helper.getChatId();
+// Read the "chatId" file in this directory to send messages to users
+const chatIds = helper.getChatIds();
+
+// Send Message to all users in "chatId" file
+function sendMessage(message){
+	chatIds.forEach((userId) => {
+		bot.sendMessage(userId, message);
+	});
+}
+
+// Send Photo to all users in "chatId" file
+function sendPhoto(photoPath){
+	chatIds.forEach((userId) => {
+		bot.sendPhoto(chatId, photoPath);
+	});
+}
 
 // Log the error when it occurs
 bot.on('polling_error', (err) => console.log(err));
@@ -39,6 +53,6 @@ module.exports.sendAdvice = function(photoPath){
 						dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() +
 						' às ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '\n\n';
 
-	bot.sendMessage(chatId, messageToClient);
-	bot.sendPhoto(chatId, photoPath);
+	sendMessage(messageToClient);
+	sendPhoto(photoPath);
 }
