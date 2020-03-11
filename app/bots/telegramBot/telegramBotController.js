@@ -45,13 +45,6 @@ bot.on('message', (msg) => {
 			message = `Seu id é: ${clientChatId}`;
 			break;
 
-		case '/shrek':
-			message = 'urro';
-			photoPath = 'C:/Users/FCI-LCV/Desktop/CaioLeandro/shrek.jpg';
-			sendMessageToUsers(message);
-			sendPhotoToUsers(photoPath);
-			return;
-
 		default:
 			message = 'Insira um comando válido.';
 			break;
