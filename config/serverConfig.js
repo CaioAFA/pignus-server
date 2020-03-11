@@ -25,4 +25,12 @@ consign().
 	.then('./app/bots/telegramBot/helper.js')
 	.into(app);
 
+const fs  = require('fs');
+
+// Verify if the necessary folders exists
+// If don't, we'll create then.
+if(! fs.existsSync('./app/public/photos')){
+	fs.mkdirSync('./app/public/photos', {recursive: true});
+}
+
 module.exports = app;

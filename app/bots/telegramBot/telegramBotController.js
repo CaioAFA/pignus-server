@@ -6,18 +6,29 @@ const bot = new TelegramBot(token, {polling: true});
 
 // Read the "chatId" file in this directory to send messages to users
 const chatIds = helper.getChatIds();
+console.log(chatIds);
 
 // Send Message to all users in "chatId" file
-function sendMessage(message){
+function sendMessageToUsers(message){
 	chatIds.forEach((userId) => {
-		bot.sendMessage(userId, message);
+		try{
+			bot.sendMessage(userId, message);
+		}
+		catch(error){
+			console.log(error);
+		}
 	});
 }
 
 // Send Photo to all users in "chatId" file
-function sendPhoto(photoPath){
+function sendPhotoToUsers(photoPath){
 	chatIds.forEach((userId) => {
-		bot.sendPhoto(chatId, photoPath);
+		try{
+			bot.sendPhoto(userId, photoPath);
+		}
+		catch(error){
+			console.log(error);
+		}
 	});
 }
 
@@ -33,6 +44,13 @@ bot.on('message', (msg) => {
 		case '/meuId':
 			message = `Seu id é: ${clientChatId}`;
 			break;
+
+		case '/shrek':
+			message = 'urro';
+			photoPath = 'C:/Users/FCI-LCV/Desktop/CaioLeandro/shrek.jpg';
+			sendMessageToUsers(message);
+			sendPhotoToUsers(photoPath);
+			return;
 
 		default:
 			message = 'Insira um comando válido.';
@@ -53,6 +71,6 @@ module.exports.sendAdvice = function(photoPath){
 						dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() +
 						' às ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '\n\n';
 
-	sendMessage(messageToClient);
-	sendPhoto(photoPath);
+	sendMessageToUsers(messageToClient);
+	sendPhotoToUsers(photoPath);
 }

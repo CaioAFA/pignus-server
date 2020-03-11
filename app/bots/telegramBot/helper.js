@@ -1,13 +1,16 @@
 const fs = require('fs');
 
 module.exports.getChatIds = function(){
-	// If the archive can't be read, we'll return an empty array
-	let chatIds;
 	try{
-		const chatIdFileContent = fs.readFileSync('./app/bots/telegramBot/chatId', 'utf8');
+		const chatIdFileContent = fs.readFileSync('./app/bots/telegramBot/chatIds', 'utf8');
 
 		// Split different chat id's by lines and remove the '/r'
 		let chatIds = chatIdFileContent.split('\n');
+
+		// Remove the '\r' char
+		for(var i = 0; i < chatIds.length; i++){
+			chatIds[i] = chatIds[i].replace('\r', '');
+		}
 
 		// Remove the empty lines
 		chatIds = chatIds.filter((lineContent) => {
@@ -19,14 +22,10 @@ module.exports.getChatIds = function(){
 			return lineContent.trim()[0] != '#';
 		});
 
-		for(var i = 0; i < chatIds.length; i++){
-			chatIds[i] = chatIds[i].replace('\r', '');
-		}
+		return chatIds;
 	}
-	catch(error){
+	catch(error){	// If the archive can't be read, we'll return an empty array
 		console.log('Nao foi possivel ler o arquivo chatIds.');
-		chatIds = [];
+		return [];
 	}
-
-	return chatIds;
 }
