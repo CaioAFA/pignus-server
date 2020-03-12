@@ -2,3 +2,4 @@ package-lock.json
 node_modules
 app/public/photos
 app/bots/telegramBot/chatId
+config/dbConfig.js

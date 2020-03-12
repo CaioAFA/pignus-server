@@ -23,6 +23,7 @@ consign().
 	.then('./app/models')
 	.then('./app/bots/telegramBot/telegramBotController.js')
 	.then('./app/bots/telegramBot/helper.js')
+	.then('./config/dbConfig.js')
 	.into(app);
 
 const fs  = require('fs');
