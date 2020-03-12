@@ -34,4 +34,10 @@ if(! fs.existsSync('./app/public/photos')){
 	fs.mkdirSync('./app/public/photos', {recursive: true});
 }
 
+//Verify if the database config exists
+if(! fs.existsSync('./config/dbConfig.js')){
+	console.log('ERRO: Arquivo de configurações do banco de dados não encontrado (./config/dbConfig.js).');
+	process.exit(1);
+}
+
 module.exports = app;
