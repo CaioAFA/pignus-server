@@ -6,7 +6,6 @@ const bot = new TelegramBot(token, {polling: true});
 
 // Read the "chatId" file in this directory to send messages to users
 const chatIds = helper.getChatIds();
-console.log(chatIds);
 
 // Send Message to all users in "chatId" file
 function sendMessageToUsers(message){
