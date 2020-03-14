@@ -57,7 +57,7 @@
 	</nav>
 
 	<div class="vh-100 row no-gutters d-flex justify-content-center align-items-center">
-		<div class="col-6 center-div-border vertical-padding-20px">
+		<div class="col-6 center-div-border vertical-padding-20px max-height-400px overflow-y-scroll">
 			<div class="col-12">
 				<table class="table table-hover">
 					<thead>
@@ -68,28 +68,22 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Caio Arrabal</td>
-							<td>990434657</td>
-							<td class="text-align-center">
-								<i class="material-icons"
-								style="cursor: pointer;"
-								onclick="deleteTelegramUser()">delete</i>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Kaio Alabau</td>
-							<td>990434167</td>
-							<td class="text-align-center">
-								<i class="material-icons"
-								style="cursor: pointer;"
-								onclick="deleteTelegramUser()">delete</i>
-							</td>
-						</tr>
-					</tbody>
+					<% if(telegramBotUsers.length > 0){ %>
+						<tbody>
+							<% telegramBotUsers.forEach((user, index) => { %>
+								<tr>
+									<th scope="row"><%= index + 1 %></th>
+									<td><%= user.username %></td>
+									<td><%= user.chatId %></td>
+									<td class="text-align-center">
+										<i class="material-icons"
+										style="cursor: pointer;"
+										onclick="deleteUser(<%= user.iduser %>)">delete</i>
+									</td>
+								</tr>
+							<% }) %>
+						</tbody>
+					<% } %>
 				</table>
 			</div>
 

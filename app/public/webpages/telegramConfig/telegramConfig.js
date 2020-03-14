@@ -34,7 +34,7 @@ function addUser(){
 		var message;
 		if(xhr.status === 200){
 			message = 'Usuário adicionado com sucesso.';
-			refreshPage();
+			refreshPage(1500);
 		}
 		else{
 			message = 'Erro: ';
@@ -46,6 +46,23 @@ function addUser(){
 	xhr.open('POST', '/telegramBot/register');
 	xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 	xhr.send(JSON.stringify(userData));
+}
+
+function deleteUser(userId){
+	const xhr = new XMLHttpRequest();
+
+	xhr.onload = function(){
+		if(xhr.status === 200){
+			refreshPage(0);
+		}
+		else{
+			alert(xhr.response);
+		}
+	}
+
+	xhr.open('DELETE', '/telegramBot/' + userId);
+	xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+	xhr.send();
 }
 
 function openAddUserModal(){
@@ -83,8 +100,8 @@ function showAddUserButton(){
 	document.getElementById('addUserButton').style.display = 'block';
 }
 
-function refreshPage(){
+function refreshPage(miliseconds){
 	setTimeout(() => {
 		location.reload();
-	}, 1500)
+	}, miliseconds)
 }

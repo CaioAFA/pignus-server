@@ -11,3 +11,11 @@
 .text-align-center{
 	text-align: center;
 }
+
+.max-height-400px{
+	max-height: 400px;
+}
+
+.overflow-y-scroll{
+	overflow-y: scroll;
+}

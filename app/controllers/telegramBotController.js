@@ -70,40 +70,55 @@ module.exports.sendAdvice = function(app, photoPath){
 	sendPhotoToUsers(app, photoPath);
 }
 
-module.exports.registerTelegramUser = function(app, req, res){
-	const username = req.body.username;
-	const chatId = req.body.chatId;
-	const userValues = [
-		username,
-		chatId
-	]
-
-	const registerUserIdSql = "" +
-			"INSERT " +
-			"INTO telegramBotUser (username, chatId) " +
-			`VALUES ('${username}', ${chatId})`;
-
+module.exports.registerTelegramUser = async function(app, req, res){
+	const telegramBotModel = new app.app.models.telegramBotModel(app);
 	try{
-		const databaseHelper = new app.app.helpers.databaseHelper();
-		databaseHelper.simpleDatabaseQuery(app, registerUserIdSql);
+		await telegramBotModel.registerTelegramUserInDatabase(req);
 		res.status(200).send('Ok');
 	}
 	catch(error){
+		console.log(error);
 		res.status(500).send(error);
 	}
 }
 
 module.exports.getTelegramUsers = async function(app, req, res){
-	try{
-		const getTelegramUsersQuery = "" +
-				"SELECT * " + 
-				"FROM telegramBotUser";
+	const telegramBotModel = new app.app.models.telegramBotModel(app);
 
-		const databaseHelper = new app.app.helpers.databaseHelper();
-		const telegramUsers = await databaseHelper.simpleDatabaseQuery(app, getTelegramUsersQuery);
-		res.status(200).send(telegramUsers);
+	try{
+		const telegramBotUsers = await telegramBotModel.getTelegramUsers();
+		res.status(200).send(telegramBotUsers);
 	}
 	catch(error){
+		console.log(error);
 		res.status(500).send(error);
 	}
+}
+
+module.exports.deleteTelegramUser = async function(app, req, res){
+	const userId = req.params.userId;
+
+	const telegramBotModel = new app.app.models.telegramBotModel(app);
+	try{
+		telegramBotModel.deleteTelegramUser(userId);
+		res.status(200).send('Ok');
+	}
+	catch(error){
+		console.log(error);
+		res.status(500).send(error);
+	}
+}
+
+module.exports.renderTelegramIntegrationPage = async function(app, req, res){
+	const telegramBotModel = new app.app.models.telegramBotModel(app);
+
+	try{
+		const telegramBotUsers = await telegramBotModel.getTelegramUsers(app);
+		res.render('telegramConfig/telegramConfig', {telegramBotUsers: telegramBotUsers});
+	}
+	catch(error){
+		console.log(error);
+		res.status(500).send(error);
+	}
+
 }

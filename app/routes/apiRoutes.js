@@ -22,4 +22,8 @@ module.exports = (app) => {
 	app.post('/telegramBot/register', (req, res) => {
 		app.app.controllers.telegramBotController.registerTelegramUser(app, req, res);
 	})
+
+	app.delete('/telegramBot/:userId', (req, res) => {
+		app.app.controllers.telegramBotController.deleteTelegramUser(app, req, res);
+	})
 }
