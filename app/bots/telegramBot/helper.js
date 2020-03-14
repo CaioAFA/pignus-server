@@ -1,31 +1,22 @@
 const fs = require('fs');
+const DatabaseHelper = require('../../helpers/databaseHelper');
 
-module.exports.getChatIds = function(){
-	try{
-		const chatIdFileContent = fs.readFileSync('./app/bots/telegramBot/chatIds', 'utf8');
+function telegramBotHelper(app){
+	this.getChatIds = () => {
+		try{
+			const getChatIdsSql = "" +
+					"SELECT chatId " +
+					"FROM telegramBotUsers ";
 
-		// Split different chat id's by lines and remove the '/r'
-		let chatIds = chatIdFileContent.split('\n');
-
-		// Remove the '\r' char
-		for(var i = 0; i < chatIds.length; i++){
-			chatIds[i] = chatIds[i].replace('\r', '');
+			const databaseHelper = new DatabaseHelper();
+			console.log(databaseHelper.simpleDatabaseQuery(getChatIdsSql));
 		}
-
-		// Remove the empty lines
-		chatIds = chatIds.filter((lineContent) => {
-			return lineContent.length != 0;
-		});
-
-		// Remove lines who begin with '#'
-		chatIds = chatIds.filter((lineContent) => {
-			return lineContent.trim()[0] != '#';
-		});
-
-		return chatIds;
+		catch(error){
+			console.log(error);
+		}
 	}
-	catch(error){	// If the archive can't be read, we'll return an empty array
-		console.log('Nao foi possivel ler o arquivo chatIds.');
-		return [];
-	}
+}
+
+module.exports = () => {
+	return telegramBotHelper;
 }

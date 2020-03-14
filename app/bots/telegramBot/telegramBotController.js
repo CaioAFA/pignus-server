@@ -1,11 +1,12 @@
 // Bot name: @BillDaSilvaBot
-const helper = require('./helper');
+const TelegramBotHelper = require('./helper');
 const TelegramBot = require('node-telegram-bot-api');
 const token = '1114270428:AAGzKFP-JtQZ1d3X27Cn9iWXcHGBwxasImI';
 const bot = new TelegramBot(token, {polling: true});
 
 // Read the "chatId" file in this directory to send messages to users
-const chatIds = helper.getChatIds();
+const telegramBotHelper = new TelegramBotHelper();
+const chatIds = telegramBotHelper.getChatIds();
 
 // Send Message to all users in "chatId" file
 function sendMessageToUsers(message){
