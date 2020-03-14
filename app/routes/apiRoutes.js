@@ -9,6 +9,11 @@ module.exports = (app) => {
 		app.app.controllers.photoController.uploadPhoto(app, req, res);
 	});
 
+	// Get the lasts incidents
+	app.get('/incidents/:numberOfIncidents', (req, res) => {
+		app.app.controllers.incidentController.getIncidents(app, req, res);
+	});
+
 	app.get('/telegramBot/users', (req, res) => {
 		app.app.controllers.telegramBotController.getTelegramUsers(app, req, res);
 	});
