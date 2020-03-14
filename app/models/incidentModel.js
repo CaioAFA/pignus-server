@@ -1,11 +1,12 @@
-function incidentModel(){
+function incidentModel(app){
+	this.dbConnection = app.config.dbConfig;
+
 	// Ex de utilização:
 	/*
-		const incidentModel = new app.app.models.incidentModel();
-		incidentModel.save(app, {timestamp: '1998-12-29 00:00:00', photoPath: './var/naosei', percentage: '0.7'});
+		const incidentModel = new app.app.models.incidentModel(app);
+		incidentModel.save({timestamp: '1998-12-29 00:00:00', photoPath: './var/naosei', percentage: '0.7'});
 	*/
-	this.save = (app, incidentData) => {
-		const dbConnection = app.config.dbConfig;
+	this.save = (incidentData) => {
 		const valuesToInsert = [
 			[
 				incidentData.timestamp,
@@ -17,11 +18,28 @@ function incidentModel(){
 			'INSERT ' +
 			'INTO incident (timestamp, photo_path, percentage) ' +
 			'VALUES (?)';
-		dbConnection.query(saveQuery, valuesToInsert, (error) => {
+		this.dbConnection.query(saveQuery, valuesToInsert, (error) => {
 			if(error){
 				throw error;
 			}
 		})
+	}
+
+	this.getLastsNIncidents = (numberOfIncidents) => {
+		const getLastsNIncidentsQuery = "" +
+			"SELECT * " +
+			"FROM security_system.incident " +
+			"ORDER BY idincident DESC " +
+			`LIMIT ${numberOfIncidents}`;
+
+		return new Promise((resolve, reject) => {
+			this.dbConnection.query(getLastsNIncidentsQuery, (error, lastsNIncidentes) => {
+				if(error){
+					return reject(error);
+				}
+				resolve(lastsNIncidentes);
+			});
+		});
 	}
 }
 
