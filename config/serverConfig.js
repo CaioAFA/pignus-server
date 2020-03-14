@@ -19,11 +19,10 @@ app.use(multiparty());
 var consign = require('consign');
 consign().
 	include('./app/routes')
+	.then('./config/dbConfig.js')
 	.then('./app/controllers')
 	.then('./app/models')
-	.then('./app/bots/telegramBot/telegramBotController.js')
-	.then('./app/bots/telegramBot/helper.js')
-	.then('./config/dbConfig.js')
+	.then('./app/helpers')
 	.into(app);
 
 const fs  = require('fs');

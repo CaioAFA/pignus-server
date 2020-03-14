@@ -8,4 +8,13 @@ module.exports = (app) => {
 	app.post('/photo', (req, res) => {
 		app.app.controllers.photoController.uploadPhoto(app, req, res);
 	});
+
+	app.get('/telegramBot/users', (req, res) => {
+		app.app.controllers.telegramBotController.getTelegramUsers(app, req, res);
+	});
+
+	// Register Telegram Bot Id
+	app.post('/telegramBot/register', (req, res) => {
+		app.app.controllers.telegramBotController.registerTelegramUser(app, req, res);
+	})
 }

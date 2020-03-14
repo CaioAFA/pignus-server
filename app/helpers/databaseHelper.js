@@ -1,14 +1,18 @@
-module.exports = function(app){
-	this.simpleDatabaseQuery = () => {
-		const dbConnection = app.config.dbConnection;
+function databaseHelper(app){
+	this.simpleDatabaseQuery = (app, query) => {
+		const dbConnection = app.config.dbConfig;
 
 		return new Promise ((resolve, reject) => {
 			dbConnection.query(query, (error, result) => {
 				if(error){
 					reject(error);
 				}
-				resolve(error);
+				resolve(result);
 			})
 		});
 	}
+}
+
+module.exports = () => {
+	return databaseHelper;
 }

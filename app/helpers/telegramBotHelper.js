@@ -1,15 +1,15 @@
-const fs = require('fs');
-const DatabaseHelper = require('../../helpers/databaseHelper');
-
 function telegramBotHelper(app){
-	this.getChatIds = () => {
+	this.app = app;
+
+	this.getChatIds = async() => {
 		try{
 			const getChatIdsSql = "" +
 					"SELECT chatId " +
-					"FROM telegramBotUsers ";
+					"FROM telegramBotUser";
 
 			const databaseHelper = new DatabaseHelper();
-			console.log(databaseHelper.simpleDatabaseQuery(getChatIdsSql));
+			const result = await databaseHelper.simpleDatabaseQuery(this.app, getChatIdsSql);
+			return result
 		}
 		catch(error){
 			console.log(error);
