@@ -4,7 +4,10 @@ var app = express();
 
 // EJS - Dynamic Content in pages
 app.set('view engine', 'ejs');
-app.set('views', './views'); // You must put the views in ./views directory
+app.set('views', './app/public/webpages');
+
+// Statis content
+app.use(express.static('./app/public/webpages'));
 
 // Body-Parser - Parse Form Data Send To Server
 var bodyParser = require('body-parser');
@@ -25,8 +28,14 @@ consign().
 	.then('./app/helpers')
 	.into(app);
 
-const fs  = require('fs');
+// Allow access to API
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "*");
+	next();
+});
 
+const fs  = require('fs');
 // Verify if the necessary folders exists
 // If don't, we'll create then.
 if(! fs.existsSync('./app/public/photos')){

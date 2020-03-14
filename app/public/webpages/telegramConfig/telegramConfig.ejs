@@ -13,9 +13,17 @@
 	<!-- Import Icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<!-- Import default css -->
-	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<!-- Import Pooper.js -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
 
+	<!-- Import default css -->
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+
+	<!-- Import this page css -->
+	<link rel="stylesheet" type="text/css" href="/telegramConfig/telegramConfig.css">
+
+	<!-- Import JS -->
+	<script type="text/javascript" src="/telegramConfig/telegramConfig.js"></script>
 </head>
 <body class="vh-100">
 
@@ -86,12 +94,79 @@
 			</div>
 
 			<div class="col-12 d-flex justify-content-center justify-content-lg-end">
-				<button type="button" class="btn btn-info">Testar Configurações</button>
-				&nbsp;&nbsp;
-				<button type="button" class="btn btn-primary">Adicionar Usuário</button>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#sendTestModal">
+					Testar Configurações
+				</button>
+				&nbsp;&nbsp;				
+				<button type="button" class="btn btn-primary" onclick="openAddUserModal()">
+					Adicionar Usuário
+				</button>
 			</div>
 		</div>
 	</div>
 
+	<!-- Send Test Modal -->
+	<div class="modal fade" id="sendTestModal" tabindex="-1" role="dialog" aria-labelledby="telegramTestLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="telegramTestLabel">Testando Telegram...</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Você deverá receber uma mensagem em breve no seu celular informando que as configurações estão Ok.
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Create User Modal -->
+	<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Adicionar Usuário</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="addUserForm">
+						<div class="form-group">
+							<label for="username">Nome</label>
+							<input type="text" class="form-control" id="username" aria-describedby="Nome do Usuario" placeholder="Ex: José da Silva">
+						</div>
+						<div class="form-group">
+							<label for="userChatId">Chat Id</label>
+
+							<span id="chatIdHelp" data-toggle="popover">?</span>
+							<script type="text/javascript">
+								$('#chatIdHelp').popover({
+									placement: 'top',
+									trigger: 'hover',
+									title: 'Onde conseguir o Chat Id?',
+									content: 'Adicione o @BillDaSilva no Telegram e digite /meuId.'
+								});
+							</script>
+							
+							<input type="text" class="form-control" id="userChatId" placeholder="012345678">
+						</div>
+					</form>
+					<div id="addUserResponse">
+						Usuario adicionado com sucesso!
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+					<button type="button" id="addUserButton" class="btn btn-primary" onclick="addUser()">Adicionar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
