@@ -88,7 +88,7 @@
 			</div>
 
 			<div class="col-12 d-flex justify-content-center justify-content-lg-end">
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#sendTestModal">
+				<button type="button" class="btn btn-info" onclick="openTestModal()">
 					Testar Configurações
 				</button>
 				&nbsp;&nbsp;				
@@ -104,16 +104,20 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="telegramTestLabel">Testando Telegram...</h5>
+					<h5 class="modal-title" id="telegramTestLabel">Teste - Integração</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
-					Em breve os usuários cadastrados deverão receber uma mensagem informando que as configurações estão ok.
+				<div class="modal-body" id="testMessageDiv">
+					Os usuários cadastrados deverão receber uma mensagem informando que as configurações estão ok.
+				</div>
+				<div class="modal-body" id="testResponseDiv">
+					Teste OK.
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+					<button type="button" id="sendTestButton" class="btn btn-primary" onclick="sendTestMessage()">Enviar Teste</button>
 				</div>
 			</div>
 		</div>

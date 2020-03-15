@@ -5,32 +5,22 @@ const token = '1114270428:AAGzKFP-JtQZ1d3X27Cn9iWXcHGBwxasImI';
 const bot = new TelegramBot(token, {polling: true});
 
 // Send Message to all users in "chatId" file
-async function sendMessageToUsers(app, message){
-	const telegramBotHelper = new TelegramBotHelper(app)
-	const users = await telegramBotHelper.getChatIds();
+async function sendMessageToAllUsers(app, message){
+	const telegramBotModel = new app.app.models.telegramBotModel(app);
+	const telegramBotUsers = await telegramBotModel.getTelegramUsers(app);
 
-	users.forEach((user) => {
-		try{
-			bot.sendMessage(user.chatId, message);
-		}
-		catch(error){
-			console.log(error);
-		}
+	telegramBotUsers.forEach(async (user) => {
+		bot.sendMessage(user.chatId, message);
 	});
 }
 
 // Send Photo to all users in "chatId" file
-async function sendPhotoToUsers(app, photoPath){
-	const telegramBotHelper = new TelegramBotHelper(app)
-	const users = await telegramBotHelper.getChatIds();
+async function sendPhotoToAllUsers(app, photoPath){
+	const telegramBotModel = new app.app.models.telegramBotModel(app);
+	const telegramBotUsers = await telegramBotModel.getTelegramUsers(app);
 
-	users.forEach((user) => {
-		try{
-			bot.sendPhoto(user.chatId, photoPath);
-		}
-		catch(error){
-			console.log(error);
-		}
+	telegramBotUsers.forEach((user) => {
+		bot.sendPhoto(user.chatId, photoPath);
 	});
 }
 
@@ -66,8 +56,8 @@ module.exports.sendAdvice = function(app, photoPath){
 						dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() +
 						' às ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '\n\n';
 
-	sendMessageToUsers(app, messageToClient);
-	sendPhotoToUsers(app, photoPath);
+	sendMessageToAllUsers(app, messageToClient);
+	sendPhotoToAllUsers(app, photoPath);
 }
 
 module.exports.registerTelegramUser = async function(app, req, res){
@@ -121,4 +111,15 @@ module.exports.renderTelegramIntegrationPage = async function(app, req, res){
 		res.status(500).send(error);
 	}
 
+}
+
+module.exports.sendTestMessage = async function(app, req, res){
+	const testMessage = `Suas configurações estão OK.\nTeste realizado em:\n${new Date().toLocaleString()}`;
+	try{
+		sendMessageToAllUsers(app, testMessage);
+		res.status(200).send('Ok');
+	}
+	catch(error){
+		res.status(500).send(error);
+	}
 }

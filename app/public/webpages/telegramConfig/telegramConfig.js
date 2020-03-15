@@ -61,7 +61,28 @@ function deleteUser(userId){
 	}
 
 	xhr.open('DELETE', '/telegramBot/' + userId);
-	xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+	xhr.send();
+}
+
+function sendTestMessage(){
+	hideSendTestButton();
+
+	const xhr = new XMLHttpRequest();
+
+	xhr.onload = function(){
+		var message;
+		if(xhr.status === 200){
+			message = 'Mensagem enviada.';
+		}
+		else{
+			message = 'Erro ao enviar mensagem: ';
+			message += xhr.response;
+		}
+
+		editTestResponseDivContent(message);
+	}
+
+	xhr.open('POST', '/telegramBot/test');
 	xhr.send();
 }
 
@@ -70,6 +91,13 @@ function openAddUserModal(){
 	showAddUserFormDiv();
 	showAddUserButton();
 	$('#addUserModal').modal();
+}
+
+function openTestModal(){
+	showTestMessageDiv();
+	showSendTestButton();
+	hideTestResponseDiv()
+	$('#sendTestModal').modal();
 }
 
 function hideAddUserResponseDiv(){
@@ -98,6 +126,34 @@ function hideAddUserButton(){
 
 function showAddUserButton(){
 	document.getElementById('addUserButton').style.display = 'block';
+}
+
+function showTestMessageDiv(){
+	document.getElementById('testMessageDiv').style.display = 'block';
+}
+
+function hideTestMessageDiv(){
+	document.getElementById('testMessageDiv').style.display = 'none';
+}
+
+function showTestResponseDiv(){
+	document.getElementById('testResponseDiv').style.display = 'block';
+}
+
+function hideTestResponseDiv(){
+	document.getElementById('testResponseDiv').style.display = 'none';
+}
+
+function hideSendTestButton(){
+	document.getElementById('sendTestButton').style.display = 'none';
+}
+
+function showSendTestButton(){
+	document.getElementById('sendTestButton').style.display = 'block';
+}
+
+function editTestResponseDivContent(content){
+	document.getElementById('testResponseDiv').innerHTML = content;
 }
 
 function refreshPage(miliseconds){
