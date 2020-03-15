@@ -80,6 +80,8 @@ function sendTestMessage(){
 		}
 
 		editTestResponseDivContent(message);
+		showTestResponseDiv();
+		hideTestMessageDiv();
 	}
 
 	xhr.open('POST', '/telegramBot/test');
