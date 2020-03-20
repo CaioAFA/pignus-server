@@ -19,6 +19,9 @@
 	<!-- Import default css -->
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 
+	<!-- Import Custom Scrollbar -->
+	<link rel="stylesheet" type="text/css" href="/css/custom-scrollbar.css">	
+
 	<!-- Import this page css -->
 	<link rel="stylesheet" type="text/css" href="/telegramConfig/telegramConfig.css">
 
@@ -57,7 +60,7 @@
 	</nav>
 
 	<div class="vh-100 row no-gutters d-flex justify-content-center align-items-center">
-		<div class="col-6 center-div-border vertical-padding-20px max-height-400px overflow-y-scroll">
+		<div class="col-6 center-div-border vertical-padding-20px max-height-400px overflow-y-scroll custom-scrollbar">
 			<div class="col-12">
 				<table class="table table-hover">
 					<thead>
@@ -152,7 +155,7 @@
 								});
 							</script>
 							
-							<input type="text" class="form-control" id="userChatId" placeholder="012345678">
+							<input type="text" class="form-control" id="userChatId" placeholder="012345678" maxlength="9">
 						</div>
 					</form>
 					<div id="addUserResponse">
