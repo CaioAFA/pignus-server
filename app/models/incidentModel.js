@@ -4,19 +4,19 @@ function incidentModel(app){
 	// Ex de utilização:
 	/*
 		const incidentModel = new app.app.models.incidentModel(app);
-		incidentModel.save({timestamp: '1998-12-29 00:00:00', photoPath: './var/naosei', percentage: '0.7'});
+		incidentModel.save({timestamp: '1998-12-29 00:00:00', photoPath: './var/naosei', chance: '0.7'});
 	*/
 	this.save = (incidentData) => {
 		const valuesToInsert = [
 			[
 				incidentData.timestamp,
 				incidentData.photoPath,
-				incidentData.percentage
+				incidentData.chance
 			]
 		]
 		const saveQuery = "" +
 			'INSERT ' +
-			'INTO incident (timestamp, photo_path, percentage) ' +
+			'INTO incident (timestamp, photo_path, chance) ' +
 			'VALUES (?)';
 		this.dbConnection.query(saveQuery, valuesToInsert, (error) => {
 			if(error){

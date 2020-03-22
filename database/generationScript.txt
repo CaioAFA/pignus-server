@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `security_system`.`incident` (
   `idincident` INT NOT NULL AUTO_INCREMENT,
   `timestamp` DATETIME NOT NULL,
   `photo_path` VARCHAR(45) NOT NULL,
-  `percentage` FLOAT NOT NULL,
+  `chance` FLOAT NOT NULL,
   PRIMARY KEY (`idincident`))
 ENGINE = InnoDB;
 

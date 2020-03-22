@@ -23,6 +23,7 @@ var consign = require('consign');
 consign().
 	include('./app/routes')
 	.then('./config/dbConfig.js')
+	.then('./config/aiServerUrl.js')
 	.then('./app/controllers')
 	.then('./app/models')
 	.then('./app/helpers')
@@ -45,6 +46,12 @@ if(! fs.existsSync('./app/public/photos')){
 //Verify if the database config exists
 if(! fs.existsSync('./config/dbConfig.js')){
 	console.log('ERRO: Arquivo de configurações do banco de dados não encontrado (./config/dbConfig.js).');
+	process.exit(1);
+}
+
+//Verify if the AI server URL file exists
+if(! fs.existsSync('./config/aiServerUrl.js')){
+	console.log('ERRO: Arquivo de configurações do banco de dados não encontrado (./config/aiServerUrl.js).');
 	process.exit(1);
 }
 

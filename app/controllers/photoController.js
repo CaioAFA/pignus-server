@@ -1,5 +1,6 @@
 // File System library
 const fs = require('fs');
+const axios = require('axios');
 
 module.exports.getPhoto = (app, req, res) => {
 	const photoUrl = `./app/public/photos/${req.params.photoName}`;
@@ -27,15 +28,41 @@ module.exports.uploadPhoto = (app, req, res) => {
 	const timeStamp = date.getTime();
 
 	const tempPhotoPath = photoData.path;
-	const photoNewPath = `./app/public/photos/${timeStamp}_${photoData.originalFilename}`;
 
-	// Move the file to ./app/public/photos directory
-	fs.rename(tempPhotoPath, photoNewPath, (err) => {
-		if(err){
-			console.log(err);
-			return res.status(500).send(err);
+	// Check for guns
+	axios.post(app.config.aiServerUrl + '/check', {
+		photoPath: tempPhotoPath
+	})
+	.then(async (result) => {
+		const hasGunChance = result.data.chance;
+
+		if(hasGunChance > 0.69){
+			const photoNewPath = `./app/public/photos/${timeStamp}_${photoData.originalFilename}`;
+
+			// Move the file to ./app/public/photos directory
+			await fs.rename(tempPhotoPath, photoNewPath, (err) => {
+				if(err){
+					console.log(err);
+					return res.status(500).send(err);
+				}
+			});
+
+			// Insert incident in Database
+			const incidentModel = new app.app.models.incidentModel(app);
+			try{
+				await incidentModel.save({timestamp: date, photoPath: photoNewPath, chance: hasGunChance});
+				res.status(200).send('Success');
+			}
+			catch(error){
+				console.log(error);
+				return res.status(500).send(error);
+			}
 		}
-
-		res.status(200).send('Success');
-	});
+		else{
+			res.status(200).send('Success');
+		}
+	})
+	.catch((error) => {
+		console.error(error)
+	})
 }
