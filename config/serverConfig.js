@@ -4,10 +4,10 @@ var app = express();
 
 // EJS - Dynamic Content in pages
 app.set('view engine', 'ejs');
-app.set('views', './app/public/webpages');
+app.set('views', './app/views');
 
-// Statis content
-app.use(express.static('./app/public/webpages'));
+// Static content
+app.use(express.static('./app/public'));
 
 // Body-Parser - Parse Form Data Send To Server
 var bodyParser = require('body-parser');
