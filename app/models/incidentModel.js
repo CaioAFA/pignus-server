@@ -10,13 +10,14 @@ function incidentModel(app){
 		const valuesToInsert = [
 			[
 				incidentData.timestamp,
-				incidentData.photoPath,
+				incidentData.originalPhotoPath,
+				incidentData.photoWithBoundingBoxPath,
 				incidentData.chance
 			]
 		]
 		const saveQuery = "" +
 			'INSERT ' +
-			'INTO incident (timestamp, photo_path, chance) ' +
+			'INTO incident (timestamp, original_photo_path, photo_path, chance) ' +
 			'VALUES (?)';
 		this.dbConnection.query(saveQuery, valuesToInsert, (error) => {
 			if(error){

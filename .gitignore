@@ -3,3 +3,4 @@ node_modules
 app/public/photos
 config/dbConfig.js
 config/aiServerUrl.js
+*.bak
