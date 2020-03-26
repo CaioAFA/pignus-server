@@ -7,6 +7,10 @@ module.exports = (app) => {
 		app.app.controllers.loginController.userLogin(app, req, res);
 	});
 
+	app.post('/user', (req, res) => {
+		app.app.controllers.loginController.createUser(app, req, res);
+	});
+
 	// Send some image of ./app/public/photo directory to client
 	app.get('/integrations/telegramConfig', (req, res) => {
 		app.app.controllers.telegramBotController.renderTelegramIntegrationPage(app, req ,res);
