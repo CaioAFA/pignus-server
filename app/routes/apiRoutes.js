@@ -14,6 +14,10 @@ module.exports = (app) => {
 		app.app.controllers.incidentController.getIncidents(app, req, res);
 	});
 
+	app.get('/searchIncidents', (req, res) => {
+		app.app.controllers.incidentController.searchIncidents(app, req, res);
+	});
+
 	app.get('/telegramBot/users', (req, res) => {
 		app.app.controllers.telegramBotController.getTelegramUsers(app, req, res);
 	});

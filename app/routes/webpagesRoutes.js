@@ -11,6 +11,10 @@ module.exports = (app) => {
 		app.app.controllers.loginController.createUser(app, req, res);
 	});
 
+	app.get('/search', (req, res) => {
+		app.app.controllers.incidentController.renderSearchPage(app, req, res);
+	});
+
 	// Send some image of ./app/public/photo directory to client
 	app.get('/integrations/telegramConfig', (req, res) => {
 		app.app.controllers.telegramBotController.renderTelegramIntegrationPage(app, req ,res);

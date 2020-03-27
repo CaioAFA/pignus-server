@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Configurações - Telegram</title>
+
+    <!-- Import Bootstrap and jQuery -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Import Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Import default css -->
+    <link rel="stylesheet" type="text/css" href="/assets/default/style.css">
+
+    <!-- Import Custom Scrollbar -->
+    <link rel="stylesheet" type="text/css" href="/assets/default/custom-scrollbar.css"> 
+
+    <!-- Import this page css -->
+    <link rel="stylesheet" type="text/css" href="/assets/searchIncidentPage/searchIncident.css">
+
+    <!-- Import this page js -->
+    <script type="text/javascript" src="/assets/searchIncidentPage/searchIncident.js"></script>
+
+    <!-- import Date Picker -->
+    <link rel="stylesheet" type="text/css" href="/assets/datepicker/css/bootstrap-datepicker.min.css">
+    <script src="/assets/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+</head>
+<body class="vh-100">
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Pignus</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav w-100">
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Incidentes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Últimos Incidentes</a>
+                        <a class="dropdown-item" href="#">Pesquisar</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Integrações
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Telegram</a>
+                    </div>
+                </li>
+                <button type="button" class="btn btn-sm btn-danger mr-auto mr-sm-0 ml-sm-auto">Logout</button>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="vh-100 row no-gutters d-flex justify-content-center align-items-center">
+        <div class="col-6 center-div-border vertical-padding-20px max-height-400px overflow-y-scroll custom-scrollbar">
+            <div class="row no-gutters border-bottom border-dark pb-4">
+                <div class="input-daterange input-group align-items-center col-6" id="datepicker">
+                    <span class="input-group-addon col-2">De:&nbsp;</span>
+                    <input type="text" class="input-sm form-control col-10" name="start" id="startDay"/>
+                    <div class="col-12 pb-1"></div>
+                    <span class="input-group-addon col-2">Até:&nbsp;</span>
+                    <input type="text" class="input-sm form-control col-10" name="end" id="endDay"/>
+                    <script>
+                        $('.input-daterange').datepicker({
+                            language: "pt-BR",
+                            todayHighlight: true,
+                            orientation: "bottom right"
+                        });
+                    </script>
+                </div>
+                <div class="col-6">
+                    <div class="col-12 pb-1 d-flex justify-content-end align-items-center">
+                        Nº máximo de resultados:&nbsp;
+                        <input type="number" name="maxMumberOfIncidents" style="width: 60px" id="maxNumberOfIncidents">
+                    </div>
+                    <div class="col-12 d-flex justify-content-end">
+                        <button class="btn btn-info" onclick="searchIncident()">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+            	<h3>Resultados</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Horário</th>
+                            <th scope="col">Chance</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <img class="thumbnail" src="https://www.petz.com.br/blog/wp-content/uploads/2017/09/tudo-sobre-porquinho-da-india.jpg">
+                            </th>
+                            <td>1998-12-29 00:00:00</td>
+                            <td>70%</td>
+                            <td>
+                                <span class="material-icons incident-info-button">
+                                    info
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <img class="thumbnail" src="https://www.petz.com.br/blog/wp-content/uploads/2017/09/tudo-sobre-porquinho-da-india.jpg">
+                            </th>
+                            <td>1998-12-29 00:00:00</td>
+                            <td>70%</td>
+                            <td>
+                                <span class="material-icons incident-info-button">
+                                    info
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <img class="thumbnail" src="https://www.petz.com.br/blog/wp-content/uploads/2017/09/tudo-sobre-porquinho-da-india.jpg">
+                            </th>
+                            <td>1998-12-29 00:00:00</td>
+                            <td>70%</td>
+                            <td>
+                                <span class="material-icons incident-info-button">
+                                    info
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

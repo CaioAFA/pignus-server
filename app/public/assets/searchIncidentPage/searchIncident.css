@@ -1,0 +1,13 @@
+.table td{
+	vertical-align: middle!important;
+}
+
+.thumbnail{
+	--img-size: 60px;
+	width: var(--img-size);
+	height: var(--img-size);
+}
+
+.incident-info-button{
+	cursor: pointer;
+}
