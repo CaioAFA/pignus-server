@@ -1,11 +1,18 @@
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function searchIncident(){
+	hideDiv('table');
+	showDiv('spinner');
+
+	await sleep(2000);
+
 	const startDayDiv = document.getElementById('startDay');
 	const endDayDiv = document.getElementById('endDay');
-	const maxNumberOfIncidentsDiv = document.getElementById('maxNumberOfIncidents');
 
 	const startDay = startDayDiv.value;
 	const endDay = endDayDiv.value;
-	const maxNumberOfIncidents = maxNumberOfIncidentsDiv.value;
 
 	// Validations
 	if(!startDay){
@@ -16,8 +23,19 @@ async function searchIncident(){
 		return endDayDiv.focus();
 	}
 
-	const result = await getIncidents(startDay, endDay, maxNumberOfIncidents);
-	console.log(result);
+	try{
+		const result = await getIncidents(startDay, endDay);
+		const incidents = JSON.parse(result.response);
+		renderIncidents(incidents);
+		updateNumberOfResults(incidents.length);
+	}
+	catch(error){
+		console.log('Error: ');
+		console.log(error);
+	}
+
+	showDiv('table');
+	hideDiv('spinner');
 }
 
 function getIncidents(startDay, endDay, maxNumberOfIncidents){
@@ -25,7 +43,12 @@ function getIncidents(startDay, endDay, maxNumberOfIncidents){
 		const xhr = new XMLHttpRequest();
 
 		xhr.onload = function(){
-			resolve(xhr);
+			if(xhr.status == 200){
+				resolve(xhr);
+			}
+			else{
+				reject(xhr);
+			}
 		}
 
 		var getUrl = '/searchIncidents?';
@@ -42,4 +65,45 @@ function getIncidents(startDay, endDay, maxNumberOfIncidents){
 		xhr.open('GET', getUrl);
 		xhr.send();
 	});
+}
+
+function renderIncidents(incidents){
+	const tableBodyDiv = document.getElementById('tableBody');
+	var tableNewContent = '';
+
+	incidents.forEach((incident) => {
+		tableNewContent += `
+            <tr>
+                <th scope="row">
+                    <img class="thumbnail" src="/photo/${incident.photo_path}">
+                </th>
+                <td>${formatMysqlTimestamp(incident.timestamp)}</td>
+                <td>${(incident.chance * 100).toFixed(2)}%</td>
+                <td>
+                    <span class="material-icons cursor-pointer" onclick="showIncidentInfo(${incident.idincident})">
+                        info
+                    </span>
+                </td>
+            </tr>
+		`
+	});
+
+	tableBodyDiv.innerHTML = tableNewContent;
+}
+
+function formatMysqlTimestamp(timestamp){
+	const splittedTimestamp = timestamp.split('T')[0].split('-');
+	return `${splittedTimestamp[2]}/${splittedTimestamp[1]}/${splittedTimestamp[0]}`;
+}
+
+function hideDiv(idDiv){
+	$(`#${idDiv}`).addClass('d-none');
+}
+
+function showDiv(idDiv){
+	$(`#${idDiv}`).removeClass('d-none');
+}
+
+function updateNumberOfResults(numberOfResults){
+	document.getElementById('result-text').innerHTML = `Resultados (${numberOfResults})`
 }

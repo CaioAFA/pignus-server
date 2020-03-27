@@ -53,7 +53,7 @@
                         Integrações
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Telegram</a>
+                        <a class="dropdown-item" href="/integrations/telegramConfig">Telegram</a>
                     </div>
                 </li>
                 <button type="button" class="btn btn-sm btn-danger mr-auto mr-sm-0 ml-sm-auto">Logout</button>
@@ -62,14 +62,14 @@
     </nav>
 
     <div class="vh-100 row no-gutters d-flex justify-content-center align-items-center">
-        <div class="col-6 center-div-border vertical-padding-20px max-height-400px overflow-y-scroll custom-scrollbar">
+        <div class="col-6 center-div-border top-padding-20px max-height-400px overflow-y-scroll custom-scrollbar">
             <div class="row no-gutters border-bottom border-dark pb-4">
                 <div class="input-daterange input-group align-items-center col-6" id="datepicker">
                     <span class="input-group-addon col-2">De:&nbsp;</span>
-                    <input type="text" class="input-sm form-control col-10" name="start" id="startDay"/>
+                    <input type="text" class="input-sm form-control col-8 ml-auto" name="start" id="startDay"/>
                     <div class="col-12 pb-1"></div>
                     <span class="input-group-addon col-2">Até:&nbsp;</span>
-                    <input type="text" class="input-sm form-control col-10" name="end" id="endDay"/>
+                    <input type="text" class="input-sm form-control col-8 ml-auto" name="end" id="endDay"/>
                     <script>
                         $('.input-daterange').datepicker({
                             language: "pt-BR",
@@ -79,63 +79,35 @@
                     </script>
                 </div>
                 <div class="col-6">
-                    <div class="col-12 pb-1 d-flex justify-content-end align-items-center">
-                        Nº máximo de resultados:&nbsp;
-                        <input type="number" name="maxMumberOfIncidents" style="width: 60px" id="maxNumberOfIncidents">
-                    </div>
                     <div class="col-12 d-flex justify-content-end">
                         <button class="btn btn-info" onclick="searchIncident()">Pesquisar</button>
                     </div>
                 </div>
             </div>
-            <div class="row no-gutters">
-            	<h3>Resultados</h3>
-                <table class="table table-hover">
+            <div class="row no-gutters d-flex flex-column align-items-center">
+            	<h3 id="result-text">Resultados</h3>
+                <div class="spinner-border text-muted d-none" id="spinner"></div>
+                <table class="table table-hover" id="table">
                     <thead>
                         <tr>
                             <th scope="col"></th>
-                            <th scope="col">Horário</th>
+                            <th scope="col" class="table-time">
+                                Horário&nbsp;
+                                <span class="material-icons cursor-pointer" id="help-time-icon" data-toggle="tooltip" data-placement="top" title="DD/MM/AAAA">
+                                    help
+                                </span>
+                                <script type="text/javascript">
+                                    $('#help-time-icon').tooltip({
+                                        container: 'body'
+                                    })
+                                </script>
+                            </th>
                             <th scope="col">Chance</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">
-                                <img class="thumbnail" src="https://www.petz.com.br/blog/wp-content/uploads/2017/09/tudo-sobre-porquinho-da-india.jpg">
-                            </th>
-                            <td>1998-12-29 00:00:00</td>
-                            <td>70%</td>
-                            <td>
-                                <span class="material-icons incident-info-button">
-                                    info
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <img class="thumbnail" src="https://www.petz.com.br/blog/wp-content/uploads/2017/09/tudo-sobre-porquinho-da-india.jpg">
-                            </th>
-                            <td>1998-12-29 00:00:00</td>
-                            <td>70%</td>
-                            <td>
-                                <span class="material-icons incident-info-button">
-                                    info
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <img class="thumbnail" src="https://www.petz.com.br/blog/wp-content/uploads/2017/09/tudo-sobre-porquinho-da-india.jpg">
-                            </th>
-                            <td>1998-12-29 00:00:00</td>
-                            <td>70%</td>
-                            <td>
-                                <span class="material-icons incident-info-button">
-                                    info
-                                </span>
-                            </td>
-                        </tr>
+                    <tbody id="tableBody">
+
                     </tbody>
                 </table>
             </div>

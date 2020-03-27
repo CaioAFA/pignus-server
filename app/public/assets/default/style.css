@@ -3,6 +3,10 @@
 	padding-bottom: 20px;
 }
 
+.top-padding-20px{
+	padding-top: 20px;
+}
+
 .center-div-border{
 	border: 3px solid black;
 	border-radius: 10px;
@@ -18,4 +22,8 @@
 
 .overflow-y-scroll{
 	overflow-y: scroll;
+}
+
+.cursor-pointer{
+	cursor: pointer;
 }

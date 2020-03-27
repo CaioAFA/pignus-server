@@ -29,7 +29,7 @@ function incidentModel(app){
 	this.getLastsNIncidents = (numberOfIncidents) => {
 		const getLastsNIncidentsQuery = "" +
 			"SELECT * " +
-			"FROM security_system.incident " +
+			"FROM incident " +
 			"ORDER BY idincident DESC " +
 			`LIMIT ${numberOfIncidents}`;
 
@@ -39,6 +39,24 @@ function incidentModel(app){
 					return reject(error);
 				}
 				resolve(lastsNIncidentes);
+			});
+		});
+	}
+
+	this.searchIncidents = (startDayInTimestamp, endDayInTimestamp) => {
+		const sql = `
+			SELECT *
+			FROM incident
+			WHERE timestamp BETWEEN '${startDayInTimestamp}' AND '${endDayInTimestamp}'
+			ORDER BY idincident DESC
+		`;
+
+		return new Promise((resolve, reject) => {
+			this.dbConnection.query(sql, (error, result) => {
+				if(error){
+					reject(error);
+				}
+				resolve(result);
 			});
 		});
 	}
