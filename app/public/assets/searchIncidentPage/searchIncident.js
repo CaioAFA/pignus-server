@@ -3,11 +3,6 @@ function sleep(ms) {
 }
 
 async function searchIncident(){
-	hideDiv('table');
-	showDiv('spinner');
-
-	await sleep(2000);
-
 	const startDayDiv = document.getElementById('startDay');
 	const endDayDiv = document.getElementById('endDay');
 
@@ -22,6 +17,9 @@ async function searchIncident(){
 	if(!endDay){
 		return endDayDiv.focus();
 	}
+
+	hideDiv('table');
+	showDiv('spinner');
 
 	try{
 		const result = await getIncidents(startDay, endDay);

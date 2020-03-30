@@ -18,6 +18,10 @@ module.exports = (app) => {
 		app.app.controllers.incidentController.searchIncidents(app, req, res);
 	});
 
+	app.get('/incident/info', (req, res) => {
+		app.app.controllers.incidentController.getIncidentInfo(app, req, res);
+	})
+
 	app.get('/telegramBot/users', (req, res) => {
 		app.app.controllers.telegramBotController.getTelegramUsers(app, req, res);
 	});

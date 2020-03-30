@@ -27,6 +27,20 @@ module.exports.searchIncidents = async function(app, req, res){
 	}
 }
 
+module.exports.getIncidentInfo = async function(app, req, res){
+	const idIncident = req.query.idIncident;
+	const incidentModel = new app.app.models.incidentModel(app); 
+
+	try{
+		const incidentInfo = await incidentModel.getIncidentInfo(idIncident);
+		res.status(200).send(incidentInfo);
+	}
+	catch(error){
+		console.log(error);
+		res.status(500).send(error);
+	}
+}
+
 // Converts date from dd/mm/yyyy to MySQL timestamp format to perform a query (yyyy/mm/dd)
 function convertToMysqlTimestamp(date){
 	var dateParts = date.split("/");

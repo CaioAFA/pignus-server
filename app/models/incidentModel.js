@@ -60,6 +60,28 @@ function incidentModel(app){
 			});
 		});
 	}
+
+	this.getIncidentInfo = (idIncident) => {
+		const sql = `
+			SELECT *
+			FROM incident
+			WHERE idincident = ${idIncident};
+		`
+
+		return new Promise((resolve, reject) => {
+			this.dbConnection.query(sql, (error, result) => {
+				if(error){
+					reject(error);
+				}
+
+				if(result.length == 0){
+					reject('No incident found.');
+				}
+
+				resolve(result[0]);
+			});
+		});
+	}
 }
 
 module.exports = () => {
