@@ -1,5 +1,6 @@
 // File System library
 const fs = require('fs');
+const axios = require('axios');
 
 module.exports.getPhoto = (app, req, res) => {
 	const photoUrl = `./app/public/photos/${req.params.photoName}`;
@@ -20,15 +21,22 @@ module.exports.getPhoto = (app, req, res) => {
 }
 
 module.exports.uploadPhoto = (app, req, res) => {
-	var photoData = req.files.photo;
+	var originalPhotoData = req.files.photo;
+	const originalPhotoTempPath = originalPhotoData.path;
 
-	// Change the photo name to not overwrite another file
-	const date = new Date();
-	const timeStamp = date.getTime();
+	// Check for guns
+	axios.post(app.config.aiServerUrl + '/check', {
+		photoPath: originalPhotoTempPath
+	})
+	.then(async (result) => {
+		const hasGunChance = result.data.result.chance;
 
-	const tempPhotoPath = photoData.path;
-	const photoNewPath = `./app/public/photos/${timeStamp}_${photoData.originalFilename}`;
+		if(hasGunChance > 0.69){
+			// Change the photo name to not overwrite another file
+			const date = new Date();
+			const timeStamp = date.getTime();
 
+<<<<<<< HEAD
 	// Move the file to ./app/public/photos directory
 	fs.rename(tempPhotoPath, photoNewPath, (err) => {
 		if(err){
@@ -37,4 +45,35 @@ module.exports.uploadPhoto = (app, req, res) => {
 		}
 		res.status(200).send('Success');
 	});
+=======
+			const originalPhotoNewName = `${timeStamp}_${originalPhotoData.originalFilename}`;
+			const originalPhotoNewPath = `./app/public/photos/${originalPhotoNewName}`;
+
+			const photoWithBoundingBoxPath = `${result.data.result.photoWithBoundingBoxPath}`;
+			const photoWithBoundingBoxNewName = `${timeStamp}_bb_${originalPhotoData.originalFilename}`;
+			const photoWithBoundingBoxNewPath = `./app/public/photos/${photoWithBoundingBoxNewName}`;
+
+			// Move the original photo file and the photo with bounding boxed to ./app/public/photos directory
+			fs.copyFileSync(originalPhotoTempPath, originalPhotoNewPath);
+			fs.copyFileSync(photoWithBoundingBoxPath, photoWithBoundingBoxNewPath);
+
+			// Insert incident in Database
+			const incidentModel = new app.app.models.incidentModel(app);
+			try{
+				await incidentModel.save({timestamp: date, originalPhotoPath: originalPhotoNewName, photoWithBoundingBoxPath: photoWithBoundingBoxNewName, chance: hasGunChance});
+				res.status(200).send('Success');
+			}
+			catch(error){
+				console.log(error);
+				return res.status(500).send(error);
+			}
+		}
+		else{
+			res.status(200).send('Success');
+		}
+	})
+	.catch((error) => {
+		console.error(error)
+	})
+>>>>>>> 3229f45f7e382c566cc7390e52cc0c7c8ff76f44
 }

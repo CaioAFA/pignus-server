@@ -14,6 +14,14 @@ module.exports = (app) => {
 		app.app.controllers.incidentController.getIncidents(app, req, res);
 	});
 
+	app.get('/searchIncidents', (req, res) => {
+		app.app.controllers.incidentController.searchIncidents(app, req, res);
+	});
+
+	app.get('/incident/info', (req, res) => {
+		app.app.controllers.incidentController.getIncidentInfo(app, req, res);
+	});
+
 	app.get('/telegramBot/users', (req, res) => {
 		app.app.controllers.telegramBotController.getTelegramUsers(app, req, res);
 	});
@@ -21,13 +29,21 @@ module.exports = (app) => {
 	// Register Telegram Bot Id
 	app.post('/telegramBot/register', (req, res) => {
 		app.app.controllers.telegramBotController.registerTelegramUser(app, req, res);
-	})
+	});
 
 	app.delete('/telegramBot/:userId', (req, res) => {
 		app.app.controllers.telegramBotController.deleteTelegramUser(app, req, res);
-	})
+	});
 
 	app.post('/telegramBot/test', (req, res) => {
 		app.app.controllers.telegramBotController.sendTestMessage(app, req, res);
-	})
+	});
+
+	app.post('/login', (req, res) => {
+		app.app.controllers.loginController.userLogin(app, req, res);
+	});
+
+	app.post('/user', (req, res) => {
+		app.app.controllers.userController.createUser(app, req, res);
+	});
 }

@@ -1,3 +1,4 @@
+/*
 function telegramBotHelper(app){
 	this.app = app;
 
@@ -20,3 +21,4 @@ function telegramBotHelper(app){
 module.exports = () => {
 	return telegramBotHelper;
 }
+*/

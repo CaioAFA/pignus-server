@@ -1,0 +1,35 @@
+.table{
+	margin-bottom: 0px;
+}
+
+.table td{
+	vertical-align: middle!important;
+}
+
+.thumbnail{
+	--img-size: 60px;
+	width: var(--img-size);
+	height: var(--img-size);
+}
+
+.incident-info-button{
+	cursor: pointer;
+}
+
+.table-time{
+    display: flex;
+    align-items: center;
+    border-bottom-width: 1px!important;
+}
+
+#help-time-icon{
+	font-size: large;
+}
+
+.tooltip .arrow{
+	left: 51px!important;
+}
+
+#spinner{
+	margin-bottom: 10px;
+}

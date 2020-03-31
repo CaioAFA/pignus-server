@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Criar Usuário</title>
+
+    <!-- Import Bootstrap and jQuery -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Import default css -->
+    <link rel="stylesheet" type="text/css" href="/assets/default/style.css">
+
+    <!-- Import this page Js -->
+    <script type="text/javascript" src="/assets/createUserPage/createUserPage.js"></script>
+</head>
+<body class="vh-100">
+
+    <!-- Load Navbar -->
+    <div id="navbar-placeholder"></div>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $("#navbar-placeholder").load("/assets/navbar/navbar.html");
+        })
+    </script>
+
+    <div class="vh-100 row no-gutters d-flex justify-content-center align-items-center">
+        <div class="col-6 col-md-4 col-lg-2 center-div-border top-padding-20px max-height-400px custom-scrollbar">
+            <div class="row no-gutters border-bottom border-dark pb-4">
+                <div class="row no-gutters w-100 d-flex justify-content-center">
+                    <div class="form-group col-11">
+                        <label for="usernameInput">Usuário</label>
+                        <input type="text" class="form-control" id="usernameInput">
+                    </div>
+                    <div class="form-group col-11">
+                        <label for="passwordInput">Senha</label>
+                        <input type="password" class="form-control" id="passwordInput">
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <button class="btn btn-success col-11" onclick='createUser()'>Adicionar Usuário</button>
+                </div>
+                <div id="postResponseDiv" class="overflow-x-scroll" style="display: none">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

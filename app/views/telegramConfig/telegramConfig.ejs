@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Configurações - Telegram</title>
+
+	<!-- Import Bootstrap and jQuery -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<!-- Import Icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<!-- Import Pooper.js -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
+
+	<!-- Import default css -->
+	<link rel="stylesheet" type="text/css" href="/assets/default/style.css">
+
+	<!-- Import Custom Scrollbar -->
+	<link rel="stylesheet" type="text/css" href="/assets/default/custom-scrollbar.css">	
+
+	<!-- Import this page css -->
+	<link rel="stylesheet" type="text/css" href="/assets/telegramConfigPage/telegramConfig.css">
+
+	<!-- Import JS -->
+	<script type="text/javascript" src="/assets/telegramConfigPage/telegramConfig.js"></script>
+</head>
+<body class="vh-100">
+
+    <!-- Load Navbar -->
+    <div id="navbar-placeholder"></div>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $("#navbar-placeholder").load("/assets/navbar/navbar.html");
+        })
+    </script>
+
+	<div class="vh-100 row no-gutters d-flex justify-content-center align-items-center">
+		<div class="col-6 center-div-border vertical-padding-20px max-height-400px overflow-y-scroll custom-scrollbar">
+			<div class="col-12">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Chat Id</th>
+							<th></th>
+						</tr>
+					</thead>
+					<% if(telegramBotUsers.length > 0){ %>
+						<tbody>
+							<% telegramBotUsers.forEach((user, index) => { %>
+								<tr>
+									<th scope="row"><%= index + 1 %></th>
+									<td><%= user.username %></td>
+									<td><%= user.chatId %></td>
+									<td class="text-align-center">
+										<i class="material-icons"
+										style="cursor: pointer;"
+										onclick="deleteUser(<%= user.iduser %>)">delete</i>
+									</td>
+								</tr>
+							<% }) %>
+						</tbody>
+					<% } %>
+				</table>
+			</div>
+
+			<div class="col-12 d-flex justify-content-center justify-content-lg-end">
+				<button type="button" class="btn btn-info" onclick="openTestModal()">
+					Testar Todos
+				</button>
+				&nbsp;&nbsp;				
+				<button type="button" class="btn btn-primary" onclick="openAddUserModal()">
+					Adicionar Usuário
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Send Test Modal -->
+	<div class="modal fade" id="sendTestModal" tabindex="-1" role="dialog" aria-labelledby="telegramTestLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="telegramTestLabel">Teste - Integração</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="testMessageDiv">
+					Os usuários cadastrados deverão receber uma mensagem informando que as configurações estão ok.
+				</div>
+				<div class="modal-body" id="testResponseDiv">
+					Teste OK.
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+					<button type="button" id="sendTestButton" class="btn btn-primary" onclick="sendTestMessage()">Enviar Teste</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Create User Modal -->
+	<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Adicionar Usuário</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="addUserForm">
+						<div class="form-group">
+							<label for="username">Nome</label>
+							<input type="text" class="form-control" id="username" aria-describedby="Nome do Usuario" placeholder="Ex: José da Silva">
+						</div>
+						<div class="form-group">
+							<label for="userChatId">Chat Id</label>
+
+							<span id="chatIdHelp" data-toggle="popover">?</span>
+							<script type="text/javascript">
+								$('#chatIdHelp').popover({
+									placement: 'top',
+									trigger: 'hover',
+									title: 'Onde conseguir o Chat Id?',
+									content: 'Adicione o @BillDaSilva no Telegram e digite /meuId.'
+								});
+							</script>
+							
+							<input type="text" class="form-control" id="userChatId" placeholder="012345678" maxlength="9">
+						</div>
+					</form>
+					<div id="addUserResponse">
+						Usuario adicionado com sucesso!
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+					<button type="button" id="addUserButton" class="btn btn-primary" onclick="addUser()">Adicionar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
