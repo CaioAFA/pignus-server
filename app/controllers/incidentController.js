@@ -47,6 +47,6 @@ function convertToMysqlTimestamp(date){
 	return `${+dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
 }
 
-module.exports.renderSearchPage = function(app, req, res){
+module.exports.renderLastIncidents = function(app, req, res){
 	res.render('incidents/lastIncidents')
 }

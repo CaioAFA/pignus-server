@@ -1,0 +1,19 @@
+html, body {
+	height: 100%;
+}
+
+.img{
+	width: 49.7%;
+	height: 49.7%;
+}
+
+#magnifiedImageDiv{
+	display: none;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	color: white;
+}
