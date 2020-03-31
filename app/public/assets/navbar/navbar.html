@@ -29,8 +29,8 @@
                     Usuários
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/incidentsPage/lastIncidents">Criar Usuário</a>
-                    <a class="dropdown-item" href="/incidentsPage/search">Gerenciar Usuários</a>
+                    <a class="dropdown-item" href="/usersPage/create">Criar Usuário</a>
+                    <a class="dropdown-item" href="/usersPage/manage">Gerenciar Usuários</a>
                 </div>
             </li>
 
@@ -44,14 +44,16 @@
         const url = window.location.href;
         var activeDiv;
 
-        console.log(url);
-
         if(url.includes('integrations')){
             activeDiv = document.getElementById('navbar-integration');
         }
 
         else if(url.includes('incidentsPage')){
             activeDiv = document.getElementById('navbar-incident');
+        }
+
+        else if(url.includes('usersPage')){
+            activeDiv = document.getElementById('navbar-users');
         }
 
         if(activeDiv){
