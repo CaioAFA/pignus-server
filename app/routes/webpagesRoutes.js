@@ -11,7 +11,7 @@ module.exports = (app) => {
 		app.app.controllers.loginController.createUser(app, req, res);
 	});
 
-	app.get('/search', (req, res) => {
+	app.get('/incidentsPage/search', (req, res) => {
 		app.app.controllers.incidentController.renderSearchPage(app, req, res);
 	});
 

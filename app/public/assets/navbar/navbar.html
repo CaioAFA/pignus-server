@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Pignus</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav w-100">
+            <li class="nav-item dropdown">
+                <a id="navbar-incident" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Incidentes
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/incidentsPage/lastIncidents">Últimos Incidentes</a>
+                    <a class="dropdown-item" href="/incidentsPage/search">Pesquisar</a>
+                </div>
+            </li>
+            
+            <li class="nav-item dropdown">
+                <a id="navbar-integration" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Integrações
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/integrations/telegramConfig">Telegram</a>
+                </div>
+            </li>
+            
+            <li class="nav-item dropdown">
+                <a id="navbar-users" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Usuários
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/incidentsPage/lastIncidents">Criar Usuário</a>
+                    <a class="dropdown-item" href="/incidentsPage/search">Gerenciar Usuários</a>
+                </div>
+            </li>
+
+            <button type="button" class="btn btn-sm btn-danger mr-auto mr-sm-0 ml-sm-auto">Logout</button>
+        </ul>
+    </div>
+</nav>
+
+<script type="text/javascript">
+    function updateNavbarActive(){
+        const url = window.location.href;
+        var activeDiv;
+
+        console.log(url);
+
+        if(url.includes('integrations')){
+            activeDiv = document.getElementById('navbar-integration');
+        }
+
+        else if(url.includes('incidentsPage')){
+            activeDiv = document.getElementById('navbar-incident');
+        }
+
+        if(activeDiv){
+            activeDiv.classList.add('active');
+        }
+    }
+
+    updateNavbarActive();
+</script>
