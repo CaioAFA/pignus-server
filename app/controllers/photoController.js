@@ -36,16 +36,6 @@ module.exports.uploadPhoto = (app, req, res) => {
 			const date = new Date();
 			const timeStamp = date.getTime();
 
-<<<<<<< HEAD
-	// Move the file to ./app/public/photos directory
-	fs.rename(tempPhotoPath, photoNewPath, (err) => {
-		if(err){
-			console.log(err);
-			return res.status(500).send(err);
-		}
-		res.status(200).send('Success');
-	});
-=======
 			const originalPhotoNewName = `${timeStamp}_${originalPhotoData.originalFilename}`;
 			const originalPhotoNewPath = `./app/public/photos/${originalPhotoNewName}`;
 
@@ -75,5 +65,5 @@ module.exports.uploadPhoto = (app, req, res) => {
 	.catch((error) => {
 		console.error(error)
 	})
->>>>>>> 3229f45f7e382c566cc7390e52cc0c7c8ff76f44
+
 }

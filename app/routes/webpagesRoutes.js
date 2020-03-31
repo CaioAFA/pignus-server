@@ -7,6 +7,10 @@ module.exports = (app) => {
 		app.app.controllers.incidentController.renderSearchPage(app, req, res);
 	});
 
+	app.get('/incidentsPage/lastIncidents', (req, res) =>{
+		app.app.controllers.incidentController.renderLastIncidents(app, req, res);
+	});
+
 	// Send some image of ./app/public/photo directory to client
 	app.get('/integrations/telegramConfig', (req, res) => {
 		app.app.controllers.telegramBotController.renderTelegramIntegrationPage(app, req ,res);
