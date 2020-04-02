@@ -36,6 +36,37 @@ function incidentModel(app){
 			});
 		});
 	}
+
+	this.getAllUsers = () => {
+		return new Promise((resolve, reject) => {
+			const SQL = `
+				SELECT *
+				FROM user;
+			`;
+			this.dbConnection.query(SQL, (error, result) => {
+				if(error){
+					reject(error);
+				}
+				resolve(result);
+			});
+		});
+	}
+
+	this.deleteUser = (idUser) => {
+		return new Promise((resolve, reject) => {
+			const SQL = `
+				DELETE
+				FROM user
+				WHERE iduser = ${idUser};
+			`;
+			this.dbConnection.query(SQL, (error) => {
+				if(error){
+					reject(error);
+				}
+				resolve();
+			});
+		});
+	};
 }
 
 module.exports = () => {

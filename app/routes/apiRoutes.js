@@ -46,4 +46,8 @@ module.exports = (app) => {
 	app.post('/user', (req, res) => {
 		app.app.controllers.userController.createUser(app, req, res);
 	});
+
+	app.delete('/user/:idUser', (req, res) => {
+		app.app.controllers.userController.deleteUser(app, req, res);
+	});
 }

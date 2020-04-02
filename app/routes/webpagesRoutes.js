@@ -24,4 +24,8 @@ module.exports = (app) => {
 	app.get('/usersPage/create', (req, res) => {
 		app.app.controllers.userController.renderCreateUserPage(app, req, res);
 	});
+
+	app.get('/usersPage/management', (req, res) => {
+		app.app.controllers.userController.renderManageUserPage(app, req, res);
+	});
 }
