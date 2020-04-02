@@ -1,4 +1,9 @@
 module.exports = (app) => {
+	// Redirect / to /login
+	app.get('/', (req, res) => {
+		res.redirect('/login');
+	});
+
 	app.get('/login', (req, res) => {
 		app.app.controllers.loginController.renderLoginPage(app, req, res);
 	});
