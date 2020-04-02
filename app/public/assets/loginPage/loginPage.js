@@ -27,7 +27,7 @@ function sendLoginRequest(username, password){
 	xhr.open('POST', '/login');
 	xhr.onload = function(){
 		if(xhr.status == 200){
-			window.location = '/integrations/telegramConfig';
+			window.location = '/incidentsPage/search';
 		}
 
 		// Not Authorized
