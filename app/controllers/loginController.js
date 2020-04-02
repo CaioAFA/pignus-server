@@ -9,6 +9,7 @@ module.exports.userLogin = async (app, req, res) => {
 	try{
 		const isAuthenticated = await userModel.authenticate(username, password);
 		if(isAuthenticated){
+			req.session.isAuthenticated = true;
 			res.status(200).send('Ok');
 		}
 		else{

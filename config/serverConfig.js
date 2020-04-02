@@ -14,9 +14,20 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+// Express Session - Save data from user session
+var expressSession = require('express-session');
+app.use(expressSession({
+	secret: 'odifisdofiasdbfierwhiofo129rhibwejiaf',
+	resave: false,
+	saveUninitialized: false
+}));
+
 // Connect-MultiParty - Receive Files From Client
 var multiparty = require('connect-multiparty');
 app.use(multiparty());
+
+// If the user is not logged, redirect to /login
+const loginRedirectMiddleware = require('./middlewares/loginRedirect')(app);
 
 // Consign - Easy Module Imports
 var consign = require('consign');
