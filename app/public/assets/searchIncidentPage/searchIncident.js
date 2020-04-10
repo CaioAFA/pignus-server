@@ -76,7 +76,7 @@ function renderIncidents(incidents){
                     <img class="thumbnail" src="/photo/${incident.photo_path}">
                 </th>
                 <td>${formatMysqlTimestamp(incident.timestamp)}</td>
-                <td>${(incident.chance * 100).toFixed(2)}%</td>
+                <td>${(incident.chance).toFixed(2)}%</td>
                 <td>
                     <span class="material-icons cursor-pointer" onclick="showIncidentInfo(${incident.idincident})">
                         info
