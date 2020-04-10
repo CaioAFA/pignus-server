@@ -31,7 +31,7 @@ module.exports.uploadPhoto = (app, req, res) => {
 	.then(async (result) => {
 		const hasGunChance = result.data.result.chance;
 
-		if(hasGunChance > 0.69){
+		if(hasGunChance > 50){
 			// Change the photo name to not overwrite another file
 			const date = new Date();
 			const timeStamp = date.getTime();
