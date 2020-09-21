@@ -1,0 +1,4 @@
+module.exports = function(){
+	// URL of the AI server
+	return 'http://localhost:3001';
+}

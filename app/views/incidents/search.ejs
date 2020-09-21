@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pesquisar Incidentes</title>
+
+    <!-- Import Bootstrap and jQuery -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Import Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Import default css -->
+    <link rel="stylesheet" type="text/css" href="/assets/default/style.css">
+
+    <!-- Import Custom Scrollbar -->
+    <link rel="stylesheet" type="text/css" href="/assets/default/custom-scrollbar.css"> 
+
+    <!-- Import this page css -->
+    <link rel="stylesheet" type="text/css" href="/assets/searchIncidentPage/searchIncident.css">
+
+    <!-- Import this page js -->
+    <script type="text/javascript" src="/assets/searchIncidentPage/searchIncident.js"></script>
+
+    <!-- import Date Picker -->
+    <link rel="stylesheet" type="text/css" href="/assets/datepicker/css/bootstrap-datepicker.min.css">
+    <script src="/assets/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+    
+</head>
+<body class="vh-100">
+
+    <!-- Load Navbar -->
+    <div id="navbar-placeholder"></div>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $("#navbar-placeholder").load("/assets/navbar/navbar.html");
+        })
+    </script>
+
+    <div class="vh-100 row no-gutters d-flex justify-content-center align-items-center">
+        <div class="col-6 center-div-border top-padding-20px max-height-400px overflow-y-scroll custom-scrollbar">
+            <div class="row no-gutters border-bottom border-dark pb-4">
+                <div class="input-daterange input-group align-items-center col-6" id="datepicker">
+                    <span class="input-group-addon col-2">De:&nbsp;</span>
+                    <input type="text" class="input-sm form-control col-8 ml-auto" name="start" id="startDay"/>
+                    <div class="col-12 pb-1"></div>
+                    <span class="input-group-addon col-2">Até:&nbsp;</span>
+                    <input type="text" class="input-sm form-control col-8 ml-auto" name="end" id="endDay"/>
+                    <script>
+                        $('.input-daterange').datepicker({
+                            language: "pt-BR",
+                            todayHighlight: true,
+                            orientation: "bottom right"
+                        });
+                    </script>
+                </div>
+                <div class="col-6">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button class="btn btn-info" onclick="searchIncident()">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters d-flex flex-column align-items-center">
+            	<h3 id="result-text">Resultados</h3>
+                <div class="spinner-border text-muted d-none" id="spinner"></div>
+                <table class="table table-hover" id="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" class="table-time">
+                                Horário&nbsp;
+                                <span class="material-icons cursor-pointer" id="help-time-icon" data-toggle="tooltip" data-placement="top" title="DD/MM/AAAA">
+                                    help
+                                </span>
+                                <script type="text/javascript">
+                                    $('#help-time-icon').tooltip({
+                                        container: 'body'
+                                    })
+                                </script>
+                            </th>
+                            <th scope="col">Chance</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incident Info Modal -->
+    <div id="modalPlaceholder"></div>
+    <script type="text/javascript" src="/assets/showIncidentInfoModal/showIncidentInfo.js"></script>
+</body>
+</html>
