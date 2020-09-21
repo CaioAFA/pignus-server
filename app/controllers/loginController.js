@@ -1,8 +1,8 @@
-module.exports.renderLoginPage = (app, req, res) => {
+export function renderLoginPage(app, req, res) {
 	res.render('login/loginPage.ejs');
 }
 
-module.exports.userLogin = async (app, req, res) => {
+export async function userLogin(app, req, res) {
 	const username = req.body.username;
 	const password = req.body.password;
 	const userModel = new app.app.models.userModel(app);

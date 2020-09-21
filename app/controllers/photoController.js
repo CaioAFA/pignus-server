@@ -1,11 +1,11 @@
 // File System library
-const fs = require('fs');
-const axios = require('axios');
+import { readFile, copyFileSync } from 'fs';
+import { post } from 'axios';
 
-module.exports.getPhoto = (app, req, res) => {
+export function getPhoto(app, req, res) {
 	const photoUrl = `./app/public/photos/${req.params.photoName}`;
 
-	fs.readFile(photoUrl, (err, photo) => {
+	readFile(photoUrl, (err, photo) => {
 		if(err){
 			console.log(err);
 			return res.status(500).send(err);
@@ -20,12 +20,12 @@ module.exports.getPhoto = (app, req, res) => {
 	});
 }
 
-module.exports.uploadPhoto = (app, req, res) => {
+export function uploadPhoto(app, req, res) {
 	var originalPhotoData = req.files.photo;
 	const originalPhotoTempPath = originalPhotoData.path;
 
 	// Check for guns
-	axios.post(app.config.aiServerUrl + '/check', {
+	post(app.config.aiServerUrl + '/check', {
 		photoPath: originalPhotoTempPath
 	})
 	.then(async (result) => {
@@ -44,8 +44,8 @@ module.exports.uploadPhoto = (app, req, res) => {
 			const photoWithBoundingBoxNewPath = `./app/public/photos/${photoWithBoundingBoxNewName}`;
 
 			// Move the original photo file and the photo with bounding boxed to ./app/public/photos directory
-			fs.copyFileSync(originalPhotoTempPath, originalPhotoNewPath);
-			fs.copyFileSync(photoWithBoundingBoxPath, photoWithBoundingBoxNewPath);
+			copyFileSync(originalPhotoTempPath, originalPhotoNewPath);
+			copyFileSync(photoWithBoundingBoxPath, photoWithBoundingBoxNewPath);
 
 			// Insert incident in Database
 			const incidentModel = new app.app.models.incidentModel(app);

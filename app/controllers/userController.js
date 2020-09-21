@@ -1,4 +1,4 @@
-module.exports.createUser = async (app, req, res) => {
+export async function createUser(app, req, res) {
 	const username = req.body.username;
 	const password = req.body.password;
 	const userModel = new app.app.models.userModel(app);
@@ -11,11 +11,11 @@ module.exports.createUser = async (app, req, res) => {
 	}
 }
 
-module.exports.renderCreateUserPage = (app, req, res) => {
+export function renderCreateUserPage(app, req, res) {
 	res.render('user/createUser');
 }
 
-module.exports.renderManageUserPage = async (app, req, res) => {
+export async function renderManageUserPage(app, req, res) {
 	const userModel = new app.app.models.userModel(app);
 	try{
 		const users = await userModel.getAllUsers();
@@ -26,7 +26,7 @@ module.exports.renderManageUserPage = async (app, req, res) => {
 	}
 }
 
-module.exports.deleteUser = async (app, req, res) => {
+export async function deleteUser(app, req, res) {
 	const idUser = req.params.idUser;
 
 	const userModel = new app.app.models.userModel(app);
