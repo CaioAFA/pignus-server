@@ -1,4 +1,4 @@
-const app = require('./config/serverConfig');
+import { listen } from './config/serverConfig';
 
 // Get Port Passed By CLI. Default: 3000.
 const myArgs = process.argv.slice(2);
@@ -11,6 +11,6 @@ else{
 	PORT = parseInt(myArgs[0]);
 }
 
-app.listen(PORT, () => {
+listen(PORT, () => {
 	console.log(`Server ON on Port ${PORT}!`);
 });

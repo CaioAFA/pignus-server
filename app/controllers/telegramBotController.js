@@ -1,6 +1,6 @@
 // Bot name: @BillDaSilvaBot
-const TelegramBotHelper = require('../helpers/telegramBotHelper');
-const TelegramBot = require('node-telegram-bot-api');
+import TelegramBotHelper from '../helpers/telegramBotHelper';
+import TelegramBot from 'node-telegram-bot-api';
 const token = '1114270428:AAGzKFP-JtQZ1d3X27Cn9iWXcHGBwxasImI';
 const bot = new TelegramBot(token, {polling: true});
 
@@ -48,7 +48,7 @@ bot.on('message', (msg) => {
 // ************************************ Messages to the "chatId" user ************************************
 
 // Send advices to the user
-module.exports.sendAdvice = function(app, photoPath){
+export function sendAdvice(app, photoPath){
 	var messageToClient = '\u26A0 Alerta de segurança!\n\n';
 
 	var dt = new Date();
@@ -60,7 +60,7 @@ module.exports.sendAdvice = function(app, photoPath){
 	sendPhotoToAllUsers(app, photoPath);
 }
 
-module.exports.registerTelegramUser = async function(app, req, res){
+export async function registerTelegramUser(app, req, res){
 	const telegramBotModel = new app.app.models.telegramBotModel(app);
 	try{
 		await telegramBotModel.registerTelegramUserInDatabase(req);
@@ -72,7 +72,7 @@ module.exports.registerTelegramUser = async function(app, req, res){
 	}
 }
 
-module.exports.getTelegramUsers = async function(app, req, res){
+export async function getTelegramUsers(app, req, res){
 	const telegramBotModel = new app.app.models.telegramBotModel(app);
 
 	try{
@@ -85,7 +85,7 @@ module.exports.getTelegramUsers = async function(app, req, res){
 	}
 }
 
-module.exports.deleteTelegramUser = async function(app, req, res){
+export async function deleteTelegramUser(app, req, res){
 	const userId = req.params.userId;
 
 	const telegramBotModel = new app.app.models.telegramBotModel(app);
@@ -99,7 +99,7 @@ module.exports.deleteTelegramUser = async function(app, req, res){
 	}
 }
 
-module.exports.renderTelegramIntegrationPage = async function(app, req, res){
+export async function renderTelegramIntegrationPage(app, req, res){
 	const telegramBotModel = new app.app.models.telegramBotModel(app);
 
 	try{
@@ -113,7 +113,7 @@ module.exports.renderTelegramIntegrationPage = async function(app, req, res){
 
 }
 
-module.exports.sendTestMessage = async function(app, req, res){
+export async function sendTestMessage(app, req, res){
 	const testMessage = `Suas configurações estão OK.\nTeste realizado em:\n${new Date().toLocaleString()}`;
 	try{
 		sendMessageToAllUsers(app, testMessage);
