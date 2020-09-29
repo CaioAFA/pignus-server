@@ -1,4 +1,4 @@
-export async function getIncidents(app, req, res){
+module.exports.getIncidents = async function(app, req, res){
 	const numberOfIncidents = req.params.numberOfIncidents;
 	try{
 		const incidentModel = new app.app.models.incidentModel(app);
@@ -10,11 +10,11 @@ export async function getIncidents(app, req, res){
 	}
 }
 
-export function renderSearchPage(app, req, res){
+module.exports.renderSearchPage = function(app, req, res){
 	res.render('incidents/search')
 }
 
-export async function searchIncidents(app, req, res){
+module.exports.searchIncidents = async function(app, req, res){
 	const startDayInTimestamp = convertToMysqlTimestamp(req.query.startDay);
 	const endDayInTimestamp = convertToMysqlTimestamp(req.query.endDay);
 	try{
@@ -27,7 +27,7 @@ export async function searchIncidents(app, req, res){
 	}
 }
 
-export async function getIncidentInfo(app, req, res){
+module.exports.getIncidentInfo = async function(app, req, res){
 	const idIncident = req.query.idIncident;
 	const incidentModel = new app.app.models.incidentModel(app); 
 
@@ -47,6 +47,6 @@ function convertToMysqlTimestamp(date){
 	return `${+dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
 }
 
-export function renderLastIncidents(app, req, res){
+module.exports.renderLastIncidents = function(app, req, res){
 	res.render('incidents/lastIncidents')
 }

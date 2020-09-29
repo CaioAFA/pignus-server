@@ -84,6 +84,6 @@ function incidentModel(app){
 	}
 }
 
-export default () => {
+module.exports = () => {
 	return incidentModel;
 }
