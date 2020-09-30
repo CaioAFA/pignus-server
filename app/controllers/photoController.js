@@ -36,11 +36,11 @@ module.exports.uploadPhoto = (app, req, res) => {
 			const date = new Date();
 			const timeStamp = date.getTime();
 
-			const originalPhotoNewName = `${timeStamp}_${originalPhotoData.originalFilename}`;
+			const originalPhotoNewName = `${timeStamp}_${originalPhotoData.originalFilename}`.replace(/\ /g, '_');
 			const originalPhotoNewPath = `./app/public/photos/${originalPhotoNewName}`;
 
 			const photoWithBoundingBoxPath = `${result.data.result.photoWithBoundingBoxPath}`;
-			const photoWithBoundingBoxNewName = `${timeStamp}_bb_${originalPhotoData.originalFilename}`;
+			const photoWithBoundingBoxNewName = `${timeStamp}_bb_${originalPhotoData.originalFilename}`.replace(/\ /g, '_');
 			const photoWithBoundingBoxNewPath = `./app/public/photos/${photoWithBoundingBoxNewName}`;
 
 			// Move the original photo file and the photo with bounding boxed to ./app/public/photos directory
@@ -51,7 +51,7 @@ module.exports.uploadPhoto = (app, req, res) => {
 			const incidentModel = new app.app.models.incidentModel(app);
 			try{
 				await incidentModel.save({timestamp: date, originalPhotoPath: originalPhotoNewName, photoWithBoundingBoxPath: photoWithBoundingBoxNewName, chance: hasGunChance});
-				res.status(200).send('Success');
+				res.status(200).send(`Chance: ${hasGunChance}%`);
 			}
 			catch(error){
 				console.log(error);
@@ -59,11 +59,12 @@ module.exports.uploadPhoto = (app, req, res) => {
 			}
 		}
 		else{
-			res.status(200).send('Success');
+			res.status(200).send(`Chance: ${hasGunChance}%`);
 		}
 	})
 	.catch((error) => {
 		console.error(error)
+		res.status(500).send(error);
 	})
 
 }
