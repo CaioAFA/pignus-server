@@ -51,6 +51,7 @@ module.exports.uploadPhoto = (app, req, res) => {
 			const incidentModel = new app.app.models.incidentModel(app);
 			try{
 				await incidentModel.save({timestamp: date, originalPhotoPath: originalPhotoNewName, photoWithBoundingBoxPath: photoWithBoundingBoxNewName, chance: hasGunChance});
+				app.app.controllers.telegramBotController.sendAdvice(app, photoWithBoundingBoxNewPath);
 				res.status(200).send(`Chance: ${hasGunChance}%`);
 			}
 			catch(error){
