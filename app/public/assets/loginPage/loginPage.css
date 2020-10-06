@@ -5,7 +5,7 @@
 }
 
 html, body{
-	background: linear-gradient(-45deg, #232931, #393e46, #4ecca3, #eeeeee);
+	background: linear-gradient(-45deg, #232931, #393e46, #232723, #34383d);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
 }
@@ -43,6 +43,10 @@ html, body{
 
 .padding-20px{
 	padding: 20px;
+}
+
+#btn-login {
+	background-color: #009565;	
 }
 
 #btn-login:hover{
