@@ -1,7 +1,33 @@
-#loginDiv{
-	border: 2px solid white;
+*{
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	color: white;
+}
+
+html, body{
+	background: linear-gradient(-45deg, #232931, #393e46, #232723, #34383d);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+#loginDiv{	
     border-radius: 10px;
-    background: lightgray;
+	background: transparent;	
+	-webkit-box-shadow: 0px 0px 72px 5px rgba(202,230,209,1);
+	-moz-box-shadow: 0px 0px 72px 5px rgba(202,230,209,1);
+	box-shadow: 0px 0px 72px 5px rgba(202,230,209,1);
 }
 
 #logo{
@@ -10,9 +36,30 @@
 	height: var(--logo-size);
 	border-radius: 100px;
 	margin-top: -100px;
-    border: 2px solid white;
+	-webkit-box-shadow: 0px 0px 72px 5px rgba(202,230,209,1);
+	-moz-box-shadow: 0px 0px 72px 5px rgba(202,230,209,1);
+	box-shadow: 0px 0px 72px 5px rgba(202,230,209,1);
 }
 
 .padding-20px{
 	padding: 20px;
+}
+
+#btn-login {
+	background-color: #009565;	
+}
+
+#btn-login:hover{
+	-webkit-box-shadow: 10px 10px 14px -2px rgba(173,154,173,0.69);
+	-moz-box-shadow: 10px 10px 14px -2px rgba(173,154,173,0.69);
+	box-shadow: 10px 10px 14px -2px rgba(173,154,173,0.69);
+}
+
+footer{
+	position: fixed;
+  	left: 0;
+  	bottom: 0;
+	width: 100%;
+	margin: 20px 0;
+	text-align: center;
 }
