@@ -2,18 +2,36 @@ html, body {
 	height: 100%;
 }
 
-.img{
-	width: 49.7%;
-	height: 49.7%;
+footer{	
+	width: 100%;
+	padding: 20px 0;
+	color: white;
+	background-color: inherit;
+	text-align: center;
+}
+
+img{
+	width: 90%;
+	height: 90%;
+	margin: auto;
+	border: 2px solid black;
+	border-radius: 2%;
 }
 
 #magnifiedImageDiv{
 	display: none;
+	position: absolute; 
+	top: 0; 
+	z-index: 999;
 }
 
-footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	color: white;
+#closeBtn{
+	position: absolute; 
+	top: 13%; 
+	right: 11.5%;
+	padding: 5px 10px;
+}
+
+#magnifiedImage{
+	margin: 7% 12.5%;
 }

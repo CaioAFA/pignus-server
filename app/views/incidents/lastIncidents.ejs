@@ -4,11 +4,13 @@
 		<meta charset="utf-8">
 		<title>Ultimos Incidentes</title>
 
-		<!-- Import Bootstrap and jQuery -->
-	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<!-- CSS only -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+		<!-- JS, Popper.js, and jQuery -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 		<!-- Import Icons -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,7 +27,7 @@
 		<!-- Import this page css -->
 		<link rel="stylesheet" type="text/css" href="/assets/lastIncidentsPage/lastIncidents.css">	
 		<!-- Import this page js -->
-    	<script type="text/javascript" src="/assets/lastIncidentsPage/lastIncidents.js"></script>
+		<script type="text/javascript" src="/assets/lastIncidentsPage/lastIncidents.js"></script>
 
 
 	</head>
@@ -37,28 +39,33 @@
 	            $("#navbar-placeholder").load("/assets/navbar/navbar.html");
 	        })
 	    </script>
-		<div class="container-fluid h-100 d-flex flex-column justify-content-center">
-			<div class="row no-gutters h-75 d-flex justify-content-center">
-				<div class="col-xs-6 col-sm-8 h-100">
-					<div class="row no-gutters h-100">
-						<div id="magnifiedImageDiv" class="w-100 h-100" style="position: absolute; top: 0; z-index: 999">
-							<img id="magnifiedImage" src="/assets/lastIncidentsPage/images/photo1.jpg" class="h-100 w-100">
-							<span onclick="closeIncidentInformation()" style="position: absolute; top: 10px; right: 10px; cursor: pointer;">&times</span>
-						</div>
-						<img id="camera1" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo1.jpg" class="rounded img pb-1 pr-1">
-						<img id="camera2" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo2.jpg" class="rounded img pb-1 pl-1">
-						<img id="camera3" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo3.jpg" class="rounded img pt-1 pr-1">
-						<img id="camera4" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo4.jpg" class="rounded img pt-1 pl-1">
-					</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-6">
+					<img id="camera1" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo1.jpg" class="img">
+				</div>
+				<div class="col-xs-12 col-sm-12 col-lg-6">
+					<img id="camera2" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo2.jpg" class="img">
 				</div>
 				<div class="col-xs-6 col-sm-4 col-lg-4 itens-align-center h-100" align="center" style="display: none;">					
 				</div>
 			</div>
-		</div>
-		<footer class="footer font-small bg-dark">
-			<div class="footer-copyright text-center py-3">© 2020 Copyright:
-				<a href="http://dontpad.com/Pignus"> Pignus</a>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-6">
+					<img id="camera3" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo3.jpg" class="img">
+				</div>
+				<div class="col-xs-12 col-sm-12 col-lg-6">
+					<img id="camera4" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo4.jpg" class="img">
+				</div>
 			</div>
+		</div>
+		<div id="magnifiedImageDiv" class="w-100 h-100">
+			<img id="magnifiedImage" src="/assets/lastIncidentsPage/images/photo1.jpg" class="h-75 w-75">
+			<span id="closeBtn" onclick="closeIncidentInformation()" class="btn btn-sm btn-info">X</span>
+		</div>
+		<footer>
+			© 2020 Copyright:
+			<a href="http://dontpad.com/Pignus"> Pignus</a>
 		</footer>
 	</body>
 </html>

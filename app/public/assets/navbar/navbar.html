@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Pignus</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
                 </div>
             </li>
 
-            <button type="button" class="btn btn-sm btn-danger mr-auto mr-sm-0 ml-sm-auto">Logout</button>
+            <button type="button" onclick="logout()" class="btn btn-sm btn-danger mr-auto mr-sm-0 ml-sm-auto">Logout</button>
         </ul>
     </div>
 </nav>
@@ -61,5 +61,17 @@
         }
     }
 
+    function logout(){
+        window.location = '/login';
+    }
+
     updateNavbarActive();
 </script>
+<style>
+    nav{
+        -webkit-box-shadow: 0px 10px 28px 0px rgba(255,255,255,0.65);
+        -moz-box-shadow: 0px 10px 28px 0px rgba(255,255,255,0.65);
+        box-shadow: 0px 10px 28px 0px rgba(255,255,255,0.65);
+        margin-bottom: 30px;
+    }
+</style>

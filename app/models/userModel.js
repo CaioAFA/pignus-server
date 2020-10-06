@@ -12,7 +12,6 @@ function incidentModel(app){
 				if(error){
 					reject(error);
 				}
-
 				if(result.length == 0)
 					resolve(false);
 

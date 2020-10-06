@@ -3,8 +3,11 @@ function sleep(ms) {
 }
 
 async function searchIncident(){
+
 	const startDayDiv = document.getElementById('startDay');
 	const endDayDiv = document.getElementById('endDay');
+
+	console.log("Eu n sei oq esta acontecendo.");
 
 	const startDay = startDayDiv.value;
 	const endDay = endDayDiv.value;
