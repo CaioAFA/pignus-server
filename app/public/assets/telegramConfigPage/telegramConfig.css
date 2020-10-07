@@ -5,3 +5,11 @@
     border-radius: 10px;
     margin-left: 6px;
 }
+
+footer{	
+	width: 100%;
+	padding: 20px 0;
+	color: white;
+	background-color: inherit;
+	text-align: center;
+}

@@ -33,3 +33,12 @@
 #spinner{
 	margin-bottom: 10px;
 }
+
+footer{	
+	width: 100%;
+	padding: 20px 0px;
+	color: white;
+	background-color: inherit;
+	text-align: center;
+	margin-top: auto;
+}
