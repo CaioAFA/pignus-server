@@ -24,4 +24,4 @@ npm install
 npm start
 ```
 
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+Distribuído sob a licença MIT.
