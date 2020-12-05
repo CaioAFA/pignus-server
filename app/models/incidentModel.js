@@ -47,13 +47,14 @@ function incidentModel(app){
 		const sql = `
 			SELECT *
 			FROM incident
-			WHERE timestamp BETWEEN '${startDayInTimestamp}' AND '${endDayInTimestamp}'
+			WHERE timestamp BETWEEN '${formatDate(startDayInTimestamp)} 00:00:00' AND '${formatDate(endDayInTimestamp)} 23:59:59'
 			ORDER BY idincident DESC
 		`;
 
 		return new Promise((resolve, reject) => {
 			this.dbConnection.query(sql, (error, result) => {
 				if(error){
+					console.log(error);
 					reject(error);
 				}
 				resolve(result);
@@ -86,4 +87,9 @@ function incidentModel(app){
 
 module.exports = () => {
 	return incidentModel;
+}
+
+// 2020/12/31 -> 2020-12-31 00:00:00
+function formatDate(date){
+	return `${date.replace(/\//g, '-')}`
 }

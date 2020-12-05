@@ -42,20 +42,48 @@
 		<div class="container" id="main">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-lg-6">
-					<img id="camera1" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo1.jpg" class="img">
+					<img id="camera1" onclick="openIncidentInformation(this)" src="
+						<% if(lastIncidents[0]) { %>
+							/photos/<%= lastIncidents[0].photo_path%>
+						<% } %>
+						<% if(!lastIncidents[0]) { %>
+							/assets/lastIncidentsPage/placeholder.png
+						<% } %>
+					" class="img">
 				</div>
 				<div class="col-xs-12 col-sm-12 col-lg-6">
-					<img id="camera2" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo2.jpg" class="img">
+					<img id="camera2" onclick="openIncidentInformation(this)" src="
+						<% if(lastIncidents[1]) { %>
+							/photos/<%= lastIncidents[1].photo_path%>
+						<% } %>
+						<% if(!lastIncidents[1]) { %>
+							/assets/lastIncidentsPage/placeholder.png
+						<% } %>
+					" class="img">
 				</div>
-				<div class="col-xs-6 col-sm-4 col-lg-4 itens-align-center h-100" align="center" style="display: none;">					
+				<div class="col-xs-6 col-sm-4 col-lg-4 itens-align-center h-100" align="center" style="display: none;">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-lg-6">
-					<img id="camera3" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo3.jpg" class="img">
+					<img id="camera3" onclick="openIncidentInformation(this)" src="
+						<% if(lastIncidents[2]) { %>
+							/photos/<%= lastIncidents[2].photo_path%>
+						<% } %>
+						<% if(!lastIncidents[2]) { %>
+							/assets/lastIncidentsPage/placeholder.png
+						<% } %>
+					" class="img">
 				</div>
 				<div class="col-xs-12 col-sm-12 col-lg-6">
-					<img id="camera4" onclick="openIncidentInformation(this)" src="/assets/lastIncidentsPage/images/photo4.jpg" class="img">
+					<img id="camera4" onclick="openIncidentInformation(this)" src="
+						<% if(lastIncidents[3]) { %>
+							/photos/<%= lastIncidents[3].photo_path%>
+						<% } %>
+						<% if(!lastIncidents[3]) { %>
+							/assets/lastIncidentsPage/placeholder.png
+						<% } %>
+					" class="img">
 				</div>
 			</div>
 		</div>

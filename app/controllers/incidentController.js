@@ -47,6 +47,14 @@ function convertToMysqlTimestamp(date){
 	return `${+dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
 }
 
-module.exports.renderLastIncidents = function(app, req, res){
-	res.render('incidents/lastIncidents')
+module.exports.renderLastIncidents = async function(app, req, res){
+	try{
+		const incidentModel = new app.app.models.incidentModel(app); 
+		const lastIncidents = await incidentModel.getLastsNIncidents(4);
+		res.render('incidents/lastIncidents', {lastIncidents})
+	}
+	catch(error){
+		console.log(error);
+		res.status(500).send(error);
+	}
 }
