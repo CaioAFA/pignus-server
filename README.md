@@ -1,5 +1,4 @@
 # Pignus Server
-> Servidor do sistema Pignus que realiza o GET e POST das imagens a serem analisadas.
 
 ## Instalação
 
