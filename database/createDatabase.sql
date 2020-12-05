@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `pignus`.`incident` (
   `idincident` INT NOT NULL AUTO_INCREMENT,
   `timestamp` DATETIME NOT NULL,
   `chance` FLOAT NOT NULL,
-  `photo_path` VARCHAR(45) NOT NULL,
-  `original_photo_path` VARCHAR(45) NOT NULL,
+  `photo_path` VARCHAR(90) NOT NULL,
+  `original_photo_path` VARCHAR(90) NOT NULL,
   PRIMARY KEY (`idincident`))
 ENGINE = InnoDB;
 
