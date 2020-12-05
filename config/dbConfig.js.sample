@@ -3,7 +3,7 @@ var mysqlConnection = mysql.createConnection({
   host     : 'localhost',
   user     : 'my_user',
   password : 'my_password',
-  database : 'my_database'
+  database : 'pignus'
 });
 
 module.exports = function(){
