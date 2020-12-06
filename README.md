@@ -24,3 +24,6 @@ npm start
 ```
 
 Distribuído sob a licença MIT.
+
+## Observação
+O servidor mestre deve estar na mesma máquina do servidor da IA.
